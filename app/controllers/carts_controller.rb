@@ -1,7 +1,11 @@
 class CartsController < ApplicationController
   def add
     current_cart.add_item(params[:id])
+    # current_cart Helper 做出拿到 cart
+    # @cart ||= Cart.from_hash(session[Cart::SessionKey])
+    # 增加 cart 裡面的 item 數量
     session[Cart::SessionKey] = current_cart.serialize
+    # 最後存進 session 裡
 
     redirect_to products_path, notice: "已加入購物車"
   end

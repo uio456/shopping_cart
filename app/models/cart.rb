@@ -11,7 +11,6 @@ class Cart
 
   def add_item(product_id)
     found_item = items.find { |item| item.product_id == product_id }
-
     if found_item
       found_item.increment
     else
@@ -19,12 +18,13 @@ class Cart
     end
   end
 
-  def empty?
-    items.empty?
-  end
+  # def empty?
+  #   items.empty?
+  # end
 
   def total_price
     items.reduce(0) { |sum, item| sum + item.price }
+    # 總數由 0 開始計算，把每一個 cart_item 金額都算出來，在相加起來。
   end
 
 # 因要使用 session，所以需讓回傳格式為 Hash
@@ -34,9 +34,13 @@ class Cart
     }
 
     { "items" => all_items }
+    
   end
 
   class << self
+    # 因為 cart 增加商品後，是透過 session 存起來，所以都需轉乘 hash 形式。
+    # 所以每次在增加商品前，需把 cart 裡面的值，先轉回 Array 形式。
+    # 每次呼叫 cart 都會先進來，所以如果 cart 是空的就直接給一個空的 Array
     def from_hash(hash)
       if hash.nil?
         new []
