@@ -10,6 +10,11 @@ class CartsController < ApplicationController
     redirect_to products_path, notice: "已加入購物車"
   end
 
+  def show
+    # @order = Order.new
+    # new 一個 order 物件讓使用者填寫 name address phone
+  end
+
   def destroy
     session[Cart::SessionKey] = nil
     redirect_to products_path, notice: "購物車已清空"
