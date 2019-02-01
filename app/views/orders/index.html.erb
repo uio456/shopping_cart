@@ -10,14 +10,14 @@
               <tbody>
                 <% order.order_items.each do |item| %>
                   <tr>
-                    <td><%= item.product.name %></th>
+                    <td><%= item.product.title %></th>
                     <td><%= item.quantity %></td>
                     <td>$<%= item.price %></td>
                   </tr>
                 <% end %>
               </tbody>
                 <tr>
-                  <!-- <td>SUBTOTAL</th> -->
+                  <td>SUBTOTAL (總計)</th>
                   <td></td>
                   <td>$<%= order.amount %></td>
                 </tr>                  
@@ -25,7 +25,7 @@
         </div>
           <h5 class="card-header">Shopping Information</h5>
           <div class="card-body">
-            <p class="card-text"><%#= order.name %>, <%= order.phone %>, <%= order.address %></p>
+            <p class="card-text"><%= order.name %>, <%= order.phone %>, <%= order.address %></p>
           </div>
         </div>
         <div class="card" style="width: 50%;">
