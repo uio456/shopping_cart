@@ -1,4 +1,5 @@
 class OrdersController < ApplicationController
+  before_action :check_user
 
   def index
     # @orders = current_user.orders.order(created_at: :desc)
@@ -7,14 +8,10 @@ class OrdersController < ApplicationController
   end
 
   def create
-    # @order = current_user.orders.new(order_params)
-    # @order.sn = Time.now.to_i
-    # @order.amount = current_cart.total_price
+    binding.pry
     @order = Order.new(sn: Time.new.to_i, amount: current_cart.total_price, user_id: current_user.id)
     @order.add_order_items(current_cart)
     if @order.save
-      # current_cart.destroy
-      # session.delete(:new_order_data)
       session[Cart::SessionKey] = nil
       redirect_to orders_path, notice: "new order created"
     else
@@ -24,7 +21,10 @@ class OrdersController < ApplicationController
 
   private
 
-  def order_params
-    params.require(:order).permit(:name, :phone, :address)
+  def check_user
+    unless current_user.present?
+      redirect_to new_user_session_path, alert: "Please, Login to Create Order, many Thans : )"
+    end
   end
+  
 end
