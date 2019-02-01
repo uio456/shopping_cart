@@ -1,53 +1,53 @@
 <div class="container">
-  <br>
-  <% @orders.each do |order| %>
-  <div class="card">
-    <h5 class="card-header">Order # <%= order.sn %></h5>
-      <div class="card-group">
-        <div class="card" style="width: 50%;">
-          <div class="card-body">
-            <table class="table table-borderless">
-              <tbody>
-                <% order.order_items.each do |item| %>
-                  <tr>
-                    <td><%= item.product.title %></th>
-                    <td><%= item.quantity %></td>
-                    <td>$<%= item.price %></td>
-                  </tr>
-                <% end %>
-              </tbody>
-                <tr>
-                  <td>SUBTOTAL (總計)</th>
-                  <td></td>
-                  <td>$<%= order.amount %></td>
-                </tr>                  
-            </table>
-        </div>
-          <h5 class="card-header">Shopping Information</h5>
-          <div class="card-body">
-            <p class="card-text"><%= order.name %>, <%= order.phone %>, <%= order.address %></p>
-          </div>
-        </div>
-        <div class="card" style="width: 50%;">
-          <div class="card-body row justify-content-center align-items-center">
-            <div class="card-text text-center">
+  <div class="row">
+
+      <% @orders.each do |order| %>
+        <div class="col-md-12">
+          <div class="panel panel-default">
+
+            <div class="col-md-6">
+              <h2>訂單編號 # <%= order.sn %></h2>
+              <div class="panel-body">
+                <table class="table table-borderless">
+                  <tbody>
+                    <% order.order_items.each do |item| %>
+                      <tr>
+                        <td><%= item.product.title %></th>
+                        <td><%= item.quantity %></td>
+                        <td>$<%= item.price %></td>
+                      </tr>
+                    <% end %>
+                  </tbody>
+                    <tr>
+                      <td>SUBTOTAL (總計)</th>
+                      <td></td>
+                      <td>$<%= order.amount %></td>
+                    </tr>                  
+                </table>
+                <h5>Shopping Information</h5>
+                <p class="card-text"><%= order.name %>訂單人姓名, <%= order.phone %>訂單人電話, <%= order.address %>訂單人地址</p>
+              </div>   
+            </div>
+          
+            <div class="col-md-6">
               <h5>Payment Status: <%#= order.show_payment_status %></h5>
-              <h5>Shipping Status: <%#= order.show_shipping_status %></h5><br>            
-              <div class="col align-self-end">
+              <h5>Shipping Status: <%#= order.show_shipping_status %></h5><br>
               <%# if order.payment_status == "not_paid" && order.shipping_status != "cancelled" %>
-                <%#= link_to 'Credit',orders_path, class: "btn btn-outline-success" %>
-                <%#= link_to 'Web ATM',orders_path, class: "btn btn-outline-success" %>
-                <%#= link_to 'ATM',orders_path, class: "btn btn-outline-success" %>
+                <%= link_to 'Credit',orders_path, class: "btn btn-default" %>
+                <%= link_to 'Web ATM',orders_path, class: "btn btn-default" %>
+                <%= link_to 'ATM',orders_path, class: "btn btn-default" %>
               <%# end %>
               <%# if order.shipping_status == "not_shipped" %>           
-                <%= link_to 'Cancel Order', order_path(order), method: :patch, data: { confirm: "Are you sure?"}, class: "btn btn-outline-warning" %>  
+                <%= link_to '取消訂單', order_path(order), method: :patch, data: { confirm: "Are you sure?"}, class: "btn btn-default btn-danger" %>  
               <%# end %>
-              </div>
             </div>
+
           </div>
         </div>
-      </div>
+      <% end %>
+
   </div>
-  <br>
-  <% end %>
 </div>   
+
+
+           
