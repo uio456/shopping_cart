@@ -19,7 +19,7 @@ class CartItem
 
   def price
     # 如果itme數量超過 3 就打折
-    quantity == 3 ? product.price * quantity * 0.8 : product.price * quantity
+    quantity > 3 ? product.price * quantity * 0.8 : product.price * quantity
     
   end
 

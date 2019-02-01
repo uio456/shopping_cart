@@ -1,6 +1,36 @@
-<%= simple_form_for product do |f| %>
-  <%= f.input :title, placeholder: "商品名稱" %>
-  <%= f.input :description, placeholder: "說明" %>
-  <%= f.input :price, placeholder: "售價" %>
-  <%= f.submit class: "btn btn-default btn-primary" %>
-<% end %>
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+    <% if @product.errors.any? %>
+      <h4>We have some errors here !</h4>
+      <ul>
+        <% @product.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+      <hr>
+    <% end %>
+      
+    <div class="col-12 col-md-12">
+      <%= form_for  [:admin, @product] do |f| %>
+        <div class="form-group">
+          <%= f.collection_select :vendor_id, Vendor.all, :id, :name, {prompt: true}, {class: "form-control"} %>
+        </div>
+        <div class="form-group">
+          <%= f.text_field :title, placeholder: "Product Name", class: "form-control"%>
+        </div>
+        <div class="form-group">
+          <%= f.text_field :description, placeholder: "Add Product Description", class: "form-control"%>
+        </div>
+        <div class="form-group">
+          <%= f.text_field :price, placeholder: "Price", class: "form-control"%>
+        </div>
+        <div class="">
+          <%= f.submit "Submit", class: "btn btn-primary" %>
+        </div>
+      <% end %>
+    </div>
+
+  </div>
+</div>
+

@@ -3,12 +3,11 @@ class OrdersController < ApplicationController
 
   def index
     # @orders = current_user.orders.order(created_at: :desc)
-    @orders = Order.all
+    @orders = current_user.orders
     # @orders = current_user.orders
   end
 
   def create
-    binding.pry
     @order = Order.new(sn: Time.new.to_i, amount: current_cart.total_price, user_id: current_user.id)
     @order.add_order_items(current_cart)
     if @order.save
@@ -26,5 +25,5 @@ class OrdersController < ApplicationController
       redirect_to new_user_session_path, alert: "Please, Login to Create Order, many Thans : )"
     end
   end
-  
+
 end

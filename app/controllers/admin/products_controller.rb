@@ -2,17 +2,19 @@ class Admin::ProductsController < Admin::BaseController
   before_action :find_product, only: [:edit, :update, :destroy]
 
   def index
+    @vendors = Vendor.all
     @products = Product.all
   end
 
   def new
     @product = Product.new
+    @vendor = Vendor.all
   end
 
   def create
     @product = Product.new(product_params)
     if @product.save
-      redirect_to products_path, notice: "新增商品完成"
+      redirect_to admin_products_path, notice: "新增商品完成"
     else
       render :new
     end
@@ -23,7 +25,7 @@ class Admin::ProductsController < Admin::BaseController
 
   def update
     if @product.update(product_params)
-      redirect_to products_path, notice: "商品更新成功"
+      redirect_to admin_products_path, notice: "商品更新成功"
     else
       render :edit
     end
@@ -41,6 +43,6 @@ class Admin::ProductsController < Admin::BaseController
   end
 
   def product_params
-    params.require(:product).permit(:title, :description, :price)
+    params.require(:product).permit(:title, :description, :price, :vendor_id)
   end
 end
