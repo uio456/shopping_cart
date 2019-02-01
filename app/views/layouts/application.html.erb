@@ -11,41 +11,39 @@
   </head>
 
   <body>
-
-    <div class="container">
-
-      <nav class="navbar navbar-inverse">
-         <div class="container-fluid">
-          <!-- Brand and toggle get grouped for better mobile display -->
-          <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-            <%= link_to  "<span class='glyphicon glyphicon-home'></span> 首頁".html_safe , root_path, class: "navbar-brand" %>
-          </div>
-          <!-- Collect the nav links, forms, and other content for toggling -->
-          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="pull-right text-right nav navbar-nav">
-              <li><%= link_to("<span class= 'glyphicon glyphicon-shopping-cart'></span> Cart".html_safe, cart_path) %></li>
-
-              <% if current_user %>
-                <% if current_user.admin? %>
-                  <li><%= link_to "<span class= 'glyphicon glyphicon-cog'></span> Admin後臺".html_safe, admin_root_path %></li>
-                <% end %>
-                <li><%#= link_to("<span class= 'glyphicon glyphicon-list-alt'></span> Order".html_safe, orders_path) %></li>
-                <li><%= link_to("<span class= 'glyphicon glyphicon-log-out'></span> 登出".html_safe, destroy_user_session_path, method: :delete) %></li>
-                <li><%= link_to("<span class= 'glyphicon glyphicon-wrench'></span> 修改密碼".html_safe, edit_user_registration_path) %></li>
-              <% else %>
-                <li><%= link_to('註冊', new_user_registration_path) %></li>
-                <li><%= link_to('登入', new_user_session_path) %></li>
-              <% end %>
-            </ul>
-          </div>
+    <nav class="navbar navbar-inverse">
+       <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <%= link_to  "<span class='glyphicon glyphicon-home'></span> 首頁".html_safe , root_path, class: "navbar-brand" %>
         </div>
-      </nav>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="pull-right text-right nav navbar-nav">
+            <li><%= link_to("<span class= 'glyphicon glyphicon-shopping-cart'></span> Cart".html_safe, cart_path) %></li>
+
+            <% if current_user %>
+              <% if current_user.admin? %>
+                <li><%= link_to "<span class= 'glyphicon glyphicon-cog'></span> Admin後臺".html_safe, admin_root_path %></li>
+              <% end %>
+              <li><%#= link_to("<span class= 'glyphicon glyphicon-list-alt'></span> Order".html_safe, orders_path) %></li>
+              <li><%= link_to("<span class= 'glyphicon glyphicon-log-out'></span> 登出".html_safe, destroy_user_session_path, method: :delete) %></li>
+              <li><%= link_to("<span class= 'glyphicon glyphicon-wrench'></span> 修改密碼".html_safe, edit_user_registration_path) %></li>
+            <% else %>
+              <li><%= link_to('註冊', new_user_registration_path) %></li>
+              <li><%= link_to('登入', new_user_session_path) %></li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="container">
       <% if flash[:notice] %>
         <div class="container">
           <div class="row">
@@ -67,8 +65,6 @@
         </div>
       <% end %>
       <%= yield %>
-
     </div>
-
   </body>
 </html>

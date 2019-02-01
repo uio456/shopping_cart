@@ -11,7 +11,7 @@ class CartsController < ApplicationController
   end
 
   def show
-    # @order = Order.new
+    @order = Order.new
     # new 一個 order 物件讓使用者填寫 name address phone
   end
 

@@ -6,6 +6,7 @@ namespace :dev do
   task fake_product: :environment do
     puts "Create fake products for development"
     Product.destroy_all
+    # 如果重新產生 product 也要把 current_cart 清掉
     10.times do
       Product.create!(
         title: FFaker::Name.first_name,

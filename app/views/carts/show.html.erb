@@ -1,5 +1,6 @@
 <h1>購物車</h1>
 
+<%= link_to '繼續選購', products_path, class: "btn btn-default" %>
 <%= link_to '清空購物車', cart_path, method: :delete, class: "btn btn-default btn-danger" %>
 
 <table class="table table-hover">
@@ -27,29 +28,15 @@
     <td><%= current_cart.total_price %></td>
   </tfood>
 </table>
-
-<%= link_to '繼續選購', products_path, class: "btn btn-default" %>
   <div class="card">
     <h5 class="card-header">Shopping Information</h5>
     <div class="card-body">
       <div class="col-md-4">
         <%= form_for @order do |f| %>
-        <div class="form-group">
-          <%= f.label :name, 'Name' %>
-          <%= f.text_field :name %>
-        </div>
-        <div class="form-group">
-          <%= f.label :phone, 'Phone' %>
-          <%= f.text_field :phone %>
-        </div>
-        <div class="form-group">
-          <%= f.label :address, 'Address' %>
-          <%= f.text_field :address%>
-        </div>
+        <%= f.submit '前往付款', class: "btn btn-primary" %>
       </div>
     </div>
   </div>
   <br>
-  <%= f.submit 'Checkout', class: "btn btn-primary" %>
   <% end %>
 <!-- 這個 cart show 頁面，在controller 裡不需定義方法即可顯示。(routes 有定義) -->
