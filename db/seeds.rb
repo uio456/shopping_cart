@@ -5,3 +5,22 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+
+Vendor.destroy_all
+
+vendor_list = [
+  {name: "Nike"},
+  {name: "BoBoCar"},
+  {name: "Shopee"},
+  {name: "Eslite"}
+]
+
+vendor_list.each do |vendor|
+  Vendor.create( name: vendor[:name])
+  puts "#{vendor[:name]} has created!"
+end
+
+#Default admin
+# User.create(email: "root@example.com", password: "12345678", role: "admin", name: "Duncan")
+# puts "Default admin create!"

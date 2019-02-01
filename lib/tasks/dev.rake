@@ -3,15 +3,16 @@ namespace :dev do
   task rebuild: ["db:drop", "db:setup", :fake, "db:seed"]
   task fake: [:fake_product, :fake_user, :fake_order]
 
-  task fake_product: :environment do
+  task fake_products: :environment do
     puts "Create fake products for development"
     Product.destroy_all
     # 如果重新產生 product 也要把 current_cart 清掉
     10.times do
       Product.create!(
-        title: FFaker::Name.first_name,
+        title: FFaker::Product.product_name,
         description: FFaker::Lorem.paragraph,
-        price: ( rand(500)+1 ) * 10
+        price: ( rand(500)+1 ) * 10,
+        vendor: Vendor.all.sample
         # image: FFaker::Avatar.image
       )
     end
