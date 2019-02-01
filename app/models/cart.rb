@@ -37,6 +37,16 @@ class Cart
     
   end
 
+  def add_order_items(cart)
+    current_cart.cart_items.each do |item|
+      self.order_items.build(
+        product_id: item.product.id,
+        quantity: item.quantity, 
+        price: item.product.price 
+      )
+    end
+  end
+
   class << self
     # 因為 cart 增加商品後，是透過 session 存起來，所以都需轉乘 hash 形式。
     # 所以每次在增加商品前，需把 cart 裡面的值，先轉回 Array 形式。
