@@ -1,9 +1,34 @@
-class Discount
-  def initialize()
-    
+class DiscountCheck
+
+  # current_cart 拉近來算，把折扣的金額算出來，在把current_cat 丟回去
+
+  def initialize(cart)
+    @cart = cart
   end
 
   def perform
+    self.discount_item
+    binding.pry
+  end
+
+  def discount_item
+    binding.pry
+  end
+
+  def discount_order
+    
+  end
+
+  def discount_vendor
+    
+  end
+
+  def total_discount
+    
+  end
+
+  def discount_deadline
+    
   end
 
 end

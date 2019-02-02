@@ -1,5 +1,8 @@
 <div class="container">
   <div class="row">
+    <h3>目前有：<%= current_user.orders.size %> 筆訂單</h3>
+
+    <br> 
 
       <% @orders.each do |order| %>
         <div class="col-md-12">
@@ -9,12 +12,20 @@
               <h2>訂單編號 # <%= order.sn %></h2>
               <div class="panel-body">
                 <table class="table table-borderless">
+                  <thead>
+                    <tr>
+                      <th>商品名稱</th>
+                      <th>數量</th>
+                      <th>小計</th>
+                    </tr>
+                  </thead>
                   <tbody>
                     <% order.order_items.each do |item| %>
                       <tr>
                         <td><%= item.product.title %></th>
                         <td><%= item.quantity %></td>
                         <td>$<%= item.price %></td>
+                        <!-- item price 只能顯示單筆 item 的金額 -->
                       </tr>
                     <% end %>
                   </tbody>
