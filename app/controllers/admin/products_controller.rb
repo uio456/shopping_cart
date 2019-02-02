@@ -16,6 +16,7 @@ class Admin::ProductsController < Admin::BaseController
     if @product.save
       redirect_to admin_products_path, notice: "新增商品完成"
     else
+      flash.alert = create_fail_error_message(@product)
       render :new
     end
   end
