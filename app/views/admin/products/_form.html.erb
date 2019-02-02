@@ -1,16 +1,5 @@
 <div class="container">
   <div class="row">
-    <div class="col-md-6">
-    <% if @product.errors.any? %>
-      <h4>We have some errors here !</h4>
-      <ul>
-        <% @product.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
-      </ul>
-      <hr>
-    <% end %>
-      
     <div class="col-12 col-md-12">
       <%= form_for  [:admin, @product] do |f| %>
         <div class="form-group">
@@ -30,7 +19,5 @@
         </div>
       <% end %>
     </div>
-
   </div>
 </div>
-
