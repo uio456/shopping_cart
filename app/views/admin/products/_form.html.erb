@@ -15,7 +15,10 @@
           <%= f.text_field :price, placeholder: "Price", class: "form-control"%>
         </div>
         <div class="form-group">
-          <%= f.text_field :state, placeholder: "State", class: "form-control"%>
+            <h4> 
+              促銷狀態 -->
+              <%= f.select :state, ["不促銷", "ItemP", "VendorP"], class: "form-control" %>
+           </h4>
         </div>
         <div class="">
           <%= f.submit "Submit", class: "btn btn-primary" %>
@@ -24,3 +27,4 @@
     </div>
   </div>
 </div>
+          

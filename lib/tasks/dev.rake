@@ -8,13 +8,13 @@ namespace :dev do
     Product.destroy_all
     # 如果重新產生 product 也要把 current_cart 清掉
     20.times do
-      Product.create!(
+      @products = Product.create!(
         title: FFaker::Product.product_name,
         description: FFaker::Lorem.paragraph,
         price: 400,
         # price: ( rand(10..50) ) * 10,
         vendor: Vendor.all.sample,
-        state: rand(1..3)
+        state: ""
         # image: FFaker::Avatar.image
       )
     end
