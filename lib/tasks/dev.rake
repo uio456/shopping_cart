@@ -7,12 +7,13 @@ namespace :dev do
     puts "Create fake products for development"
     Product.destroy_all
     # 如果重新產生 product 也要把 current_cart 清掉
-    10.times do
+    20.times do
       Product.create!(
         title: FFaker::Product.product_name,
         description: FFaker::Lorem.paragraph,
-        price: ( rand(500)+1 ) * 10,
-        vendor: Vendor.all.sample
+        price: ( rand(50) ) * 10,
+        vendor: Vendor.all.sample,
+        state: rand(1..2)
         # image: FFaker::Avatar.image
       )
     end

@@ -1,7 +1,7 @@
 <h1>商品列表</h1>
     <ul class="nav nav-pills nav-pills-center">
       <%= link_to '新增商品', new_admin_product_path, class: "btn btn-default btn-primary" %>
-      <li role="presentation" class="active"><%=link_to '全部商品', products_path %></li>
+      <li role="presentation" class="active"><%=link_to '全部商品', admin_products_path %></li>
         <% @vendors.each do |vendor| %>
       <li role="presentation">
         <%= link_to vendor.name, admin_vendor_path(vendor) %>
@@ -15,7 +15,7 @@
     <tr>
       <th>商品名稱</th>
       <th>售價</th>
-      <th>處理</th>
+      <th>編輯</th>
     </tr>
   </thead>
   <tbody>
