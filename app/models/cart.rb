@@ -23,8 +23,13 @@ class Cart
   # end
 
   def total_price
-    items.reduce(0) { |sum, item| sum + item.price }
+    cart_price = items.reduce(0) { |sum, item| sum + item.price }
+    final_price =  cart_price * 0.8 if cart_price > 1000
     # 總數由 0 開始計算，把每一個 cart_item 金額都算出來，在相加起來。
+  end
+  def check_price(cart_price)
+    final_price =  cart_price * 0.8 if cart_price > 1000
+    binding.pry
   end
 
 # 因要使用 session，所以需讓回傳格式為 Hash
@@ -34,8 +39,14 @@ class Cart
     }
 
     { "items" => all_items }
-    
   end
+
+  # def check_discount(current_cart)
+  #   binding.pry
+  #   current_cart
+  #   # current_cat.items.each do |item|
+  #   # end
+  # end
 
   class << self
     # 因為 cart 增加商品後，是透過 session 存起來，所以都需轉乘 hash 形式。

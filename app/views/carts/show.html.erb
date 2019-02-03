@@ -8,6 +8,7 @@
   <thead>
     <tr>
       <th>商品名稱</th>
+      <th>Produc.state</th>
       <th>數量</th>
       <th>單價</th>
       <th>小計</th>
@@ -17,6 +18,7 @@
     <% current_cart.items.each do |item| %>
       <tr>
         <td><%= item.product.title %></td>
+        <td><%= item.product.state %></td>
         <td><%= item.quantity %></td>
         <td><%= item.product.price %></td>
         <td><%= item.price %></td>
@@ -25,7 +27,7 @@
   </tbody>
   <tfood>
   <tr>
-    <td colspan="3">總計</td>
+    <td colspan="4">總計</td>
     <td><%= current_cart.total_price %></td>
   </tfood>
 </table>

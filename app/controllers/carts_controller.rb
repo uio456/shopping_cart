@@ -13,6 +13,9 @@ class CartsController < ApplicationController
   def show
     @order = Order.new
     # new 一個 order 物件讓使用者填寫 name address phone
+    # @cart = current_cart.check_discount(current_cart)
+    # @filter_cart = DiscountCart.new(current_cart).perform
+    # binding.pry
   end
 
   def destroy

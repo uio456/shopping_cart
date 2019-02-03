@@ -12,6 +12,7 @@ class OrdersController < ApplicationController
     # @order.ip_address = request.remote_ip
     # order = Discount.new(@order).perform
     # @order = DiscountCheck.new(current_cart).perform
+    # @order.order_discount(current_cart)
     @order.add_order_items(current_cart)
     if @order.save
       session[Cart::SessionKey] = nil

@@ -3,6 +3,7 @@ class Order < ApplicationRecord
   has_many :order_items, dependent: :destroy
   has_many :products, through: :order_items
 
+
   def add_order_items(current_cart)
     current_cart.items.each do |item|
       self.order_items.build(

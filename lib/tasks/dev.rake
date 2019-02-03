@@ -11,9 +11,10 @@ namespace :dev do
       Product.create!(
         title: FFaker::Product.product_name,
         description: FFaker::Lorem.paragraph,
-        price: ( rand(50) ) * 10,
+        price: 400,
+        # price: ( rand(10..50) ) * 10,
         vendor: Vendor.all.sample,
-        state: rand(1..2)
+        state: rand(1..3)
         # image: FFaker::Avatar.image
       )
     end
