@@ -23,7 +23,7 @@ class Cart
   # end
 
   def total_price
-    cart_price = items.reduce(0) { |sum, item| sum + item.price }
+    cart_price = items.reduce(0) { |sum, cart_item| sum + cart_item.price }
     final_price =  cart_price * 0.8 if cart_price > 1000
     # 總數由 0 開始計算，把每一個 cart_item 金額都算出來，在相加起來。
   end

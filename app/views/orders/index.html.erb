@@ -20,12 +20,12 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <% order.order_items.each do |item| %>
+                    <% order.order_items.each do |cart_item| %>
                       <tr>
-                        <td><%= item.product.title %></th>
-                        <td><%= item.quantity %></td>
-                        <td>$<%#= item.price %></td>
-                        <!-- item price 只能顯示單筆 item 的金額 -->
+                        <td><%= cart_item.product.title %></th>
+                        <td><%= cart_item.quantity %></td>
+                        <td>$<%= cart_item.price %></td>
+                        <!-- item.price 是總金額 -->
                       </tr>
                     <% end %>
                   </tbody>
