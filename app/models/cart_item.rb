@@ -1,5 +1,5 @@
 class CartItem
-  attr_reader :product_id, :quantity, :shipping_fee
+  attr_reader :product_id, :quantity
 
   def initialize(product_id, quantity = 1)
     @product_id = product_id
@@ -18,21 +18,7 @@ class CartItem
   end
 
   def price
-    # 如果itme數量超過 3 就打折
-    # quantity > 3 ? product.price * quantity * 0.8 : product.price * quantity
-    # Dicount.new().perform
-    # Dicount.perform
-    if product.state.eql?("ItemP") 
-      cart_item_discount
-    elsif product.state.eql?("VendorP")
-      cart_item_discount
-    else
-      product.price * quantity
-    end
-  end
-
-  def cart_item_discount
-    quantity >= 3 ? product.price * quantity * 0.8 : product.price * quantity
+    Discount.call(product, quantity)
   end
 
 end
