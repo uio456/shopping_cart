@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  payment_method: MyString
+  params: MyText
+  sn: 1
+  amount: 1
+  paid_at: 2019-02-04 17:05:23
+  order: one
+
+two:
+  payment_method: MyString
+  params: MyText
+  sn: 1
+  amount: 1
+  paid_at: 2019-02-04 17:05:23
+  order: two
