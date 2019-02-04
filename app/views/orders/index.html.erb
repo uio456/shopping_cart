@@ -30,6 +30,12 @@
                     <% end %>
                   </tbody>
                     <tr>
+                      <td>運費</th>
+                      <td></td>
+                      <td>$<%= current_cart.shipping_fee %></td>
+                      <!-- 需把 current_cart.shipping_fee 加入 order_item  -->
+                    </tr>      
+                    <tr>
                       <td>SUBTOTAL (總計)</th>
                       <td></td>
                       <td>$<%= order.amount %></td>

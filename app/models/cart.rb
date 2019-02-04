@@ -21,15 +21,25 @@ class Cart
   # def empty?
   #   items.empty?
   # end
-
-  def total_price
-    cart_price = items.reduce(0) { |sum, cart_item| sum + cart_item.price }
-    final_price =  cart_price * 0.8 if cart_price > 1000
+  
+# 先算出整台車 cart_item 的金額
+  def cart_item_price
+    cart_item_price = items.reduce(0) { |sum, cart_item| sum + cart_item.price }
     # 總數由 0 開始計算，把每一個 cart_item 金額都算出來，在相加起來。
   end
-  def check_price(cart_price)
-    final_price =  cart_price * 0.8 if cart_price > 1000
-    binding.pry
+
+  # def check_price(cart_item_price)
+  #   final_price =  cart_item_price * 0.8 if cart_item_price > 1000
+  # end
+
+# 運費預設 150 
+  def shipping_fee
+    shipping_fee = cart_item_price > 15000 ? 0 : 150
+  end
+
+# 總費用超過 1000 打 8 折，超過 1500 免運費
+  def total_price
+    final_price = cart_item_price > 1000 ? cart_item_price * 0.8 : cart_item_price + shipping_fee
   end
 
 # 因要使用 session，所以需讓回傳格式為 Hash
