@@ -31,9 +31,7 @@ class CartItem
   end
 
   def cart_item_discount
-    if quantity >= 3
-      product.price * quantity * 0.8
-    end
+    quantity >= 3 ? product.price * quantity * 0.8 : product.price * quantity
   end
 
 end
