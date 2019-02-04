@@ -18,6 +18,7 @@
                       <th>數量</th>
                       <th>單價</th>
                       <th>小計</th>
+                      <td>運費</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -27,19 +28,17 @@
                         <td><%= cart_item.quantity %></td>
                         <td>$<%= cart_item.item_price %></td>
                         <td>$<%= cart_item.cart_item_price %></td>
-                        <!-- item.price 是總金額 -->
+                      </tr>
+                      <tr>
+                        <td>運費</td>
+                        <td></td>
+                        <td></td>
+                        <td>$<%= cart_item.shipping_fee %></td>  
                       </tr>
                     <% end %>
                   </tbody>
                     <tr>
-                      <td>運費</th>
-                      <td></td>
-                      <td></td>
-                      <td>$<%= current_cart.shipping_fee %></td>
-                      <!-- 需把 current_cart.shipping_fee 加入 order_item  -->
-                    </tr>      
-                    <tr>
-                      <td>SUBTOTAL (總計)</th>
+                      <td>SUBTOTAL (總計)</td>
                       <td></td>
                       <td></td>
                       <td>$<%= order.amount %></td>

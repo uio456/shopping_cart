@@ -21,7 +21,7 @@ class Cart
   # def empty?
   #   items.empty?
   # end
-  
+
 # 先算出整台車 cart_item 的金額
   def cart_item_price
     cart_item_price = items.reduce(0) { |sum, cart_item| sum + cart_item.price }
@@ -34,12 +34,13 @@ class Cart
 
 # 運費預設 150 
   def shipping_fee
-    shipping_fee = cart_item_price > 15000 ? 0 : 150
+    shipping_fee = cart_item_price > 1500 ? 0 : 150
   end
 
 # 總費用超過 1000 打 8 折，超過 1500 免運費
   def total_price
-    final_price = cart_item_price > 1000 ? cart_item_price * 0.8 : cart_item_price + shipping_fee
+    final_price = cart_item_price > 2000 ? cart_item_price * 0.8 + shipping_fee : cart_item_price + shipping_fee
+    # 如果金額 > 1000 打八折後，金額小於 1000 ，要加運費嗎
   end
 
 # 因要使用 session，所以需讓回傳格式為 Hash
