@@ -1,10 +1,9 @@
 class CartItem
   attr_reader :product_id, :quantity, :shipping_fee
 
-  def initialize(product_id, quantity = 1, shipping_fee = 150)
+  def initialize(product_id, quantity = 1)
     @product_id = product_id
     @quantity = quantity
-    @shipping_fee = shipping_fee
   end
 
   def increment(n = 1)

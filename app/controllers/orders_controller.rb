@@ -8,7 +8,7 @@ class OrdersController < ApplicationController
   end
 
   def create
-    @order = Order.new(sn: Time.new.to_i, amount: current_cart.total_price, user_id: current_user.id)
+    @order = Order.new(sn: Time.new.to_i, amount: current_cart.total_price, shipping_fee: current_cart.shipping_fee, user_id: current_user.id)
     # @order.ip_address = request.remote_ip
     # order = Discount.new(@order).perform
     # @order = DiscountCheck.new(current_cart).perform

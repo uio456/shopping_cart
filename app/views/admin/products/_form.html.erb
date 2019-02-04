@@ -16,12 +16,14 @@
         </div>
         <div class="form-group">
           <label><h4>促銷狀態 -- ></h4></label>
-          <%= f.radio_button :state, '不促銷', class: "form-check-input" %>
-          <%= label :state, '不促銷', class: "form-check-label" %>
+          <%= f.radio_button :state, 'Normal', class: "form-check-input" %>
+          <%= label :state, 'Normal', class: "form-check-label" %>
           <%= f.radio_button :state, 'ItemP', class: "form-check-input" %>
           <%= label :state, 'ItemP', class: "form-check-label" %>
           <%= f.radio_button :state, 'VendorP', class: "form-check-input" %>
           <%= label :state, 'VendorP', class: "form-check-label" %>
+          <%= f.radio_button :state, 'ForFree', class: "form-check-input" %>
+          <%= label :state, 'ForFree', class: "form-check-label" %>
         </div>
         <div class="form-group">
           <%= f.submit "Submit", class: "btn btn-primary" %>

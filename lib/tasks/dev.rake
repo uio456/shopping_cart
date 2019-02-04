@@ -3,6 +3,8 @@ namespace :dev do
   task rebuild: ["db:drop", "db:setup", :fake, "db:seed"]
   task fake: [:fake_product, :fake_user, :fake_order]
 
+  product_state = ["Normal", "ItemP", "VendorP", "Forfree"]
+
   task fake_products: :environment do
     puts "Create fake products for development"
     Product.destroy_all
@@ -11,10 +13,10 @@ namespace :dev do
       @products = Product.create!(
         title: FFaker::Product.product_name,
         description: FFaker::Lorem.paragraph,
-        price: 400,
+        price: 100,
         # price: ( rand(10..50) ) * 10,
         vendor: Vendor.all.sample,
-        state: ""
+        state: product_state.sample
         # image: FFaker::Avatar.image
       )
     end
