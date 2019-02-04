@@ -16,7 +16,11 @@ Rails.application.routes.draw do
 
   namespace :admin, path: :make_backend_url_abstruse do
     resources :products
-    resources :vendors
+    resources :vendors do
+      member do
+        post :update_state
+      end
+    end
     root "products#index"
   end
 

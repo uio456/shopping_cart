@@ -6,6 +6,8 @@ module
   end
 end
 
+  # 如果金額超過 1000 @free_product = Product.where(state: "Forfree"].sample
+  
   # current_cart 拉近來算，把折扣的金額算出來，在把current_cat 丟回去
 
   # 是否有必要把 current_cart 拉近來變成 DiscountCart
