@@ -20,6 +20,8 @@ class CartItem
   def price
     # 如果itme數量超過 3 就打折
     # quantity > 3 ? product.price * quantity * 0.8 : product.price * quantity
+    # Dicount.new().perform
+    # Dicount.perform
     if product.state.eql?("ItemP") 
       cart_item_discount
     elsif product.state.eql?("VendorP")
@@ -27,7 +29,6 @@ class CartItem
     else
       product.price * quantity
     end
-    # product.price * quantity
   end
 
   def cart_item_discount
