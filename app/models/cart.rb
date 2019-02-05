@@ -23,6 +23,10 @@ class Cart
     # binding.pry
   end
 
+  def count_each_item
+    items.size
+  end
+
   # def empty?
   #   items.empty?
   # end

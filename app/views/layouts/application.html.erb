@@ -26,7 +26,14 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="pull-right text-right nav navbar-nav">
-            <li><%= link_to("<span class= 'glyphicon glyphicon-shopping-cart'></span> Cart".html_safe, cart_path) %></li>
+            <li>
+              <%= link_to cart_path do %>
+                <%= current_cart.count_each_item if current_cart.count_each_item > 0 %>
+                <i "<span class= 'glyphicon glyphicon-shopping-cart'>Cart</span></i>
+              <% end %>
+            </li>
+            <%#= link_to("<span class= 'glyphicon glyphicon-shopping-cart'></span> Cart".html_safe, cart_path) %>
+            <%#= link_to pluralize(current_cart.item_count, 'Cart', cart_path) %>
 
             <% if current_user %>
               <% if current_user.admin? %>
