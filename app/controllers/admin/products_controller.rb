@@ -4,6 +4,7 @@ class Admin::ProductsController < Admin::BaseController
   def index
     @vendors = Vendor.all
     @products = Product.all
+    @product = Product.new
   end
 
   def new
