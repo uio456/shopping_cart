@@ -18,7 +18,7 @@ class CartItem
   end
 
   def price
-    Discount.call(product, quantity)
+    Discount.cart_item_discount(product, quantity)
   end
 
 end

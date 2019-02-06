@@ -1,28 +1,54 @@
 module Discount
   class << self
 
-    def call(the_product, the_quantity)
+    def call
+    end
+
+    def cart_item_discount(the_product, the_quantity)
       @product = the_product
       @quantity = the_quantity
-
-    # 如果itme數量超過 3 就打折
-    # quantity > 3 ? product.price * quantity * 0.8 : product.price * quantity
-    # Dicount.new().perform
-    # Dicount.perform
-
+      
+      # Bug 這裡ItemP 跟 VendorP 都有的話只執行一次
       if @product.state.eql?("ItemP") 
-         cart_item_discount
+         cart_item_total
       elsif @product.state.eql?("VendorP")
-        cart_item_discount
+        cart_item_total
       else
         @product.price * @quantity
       end
     end
 
-    def cart_item_discount
+    def cart_item_total
+      if @quantity >= 3
+        @watching_cart_item_discount = (@product.price * @quantity) - (@product.price * @quantity * 0.8) 
+      end
       @quantity >= 3 ? @product.price * @quantity * 0.8 : @product.price * @quantity
     end
 
+    def cart_final_price(cart_item_price, shipping_fee)
+      if cart_item_price >= 1000
+        @watching_cart_discount = (cart_item_price) - (cart_item_price * 0.8) 
+        if @watching_cart_item_discount + @watching_cart_discount > 500
+          return final_price = cart_item_price - (500 - @watching_cart_item_discount)
+        end
+      end
+      final_price = cart_item_price >= 1000 ? cart_item_price * 0.8 + shipping_fee : cart_item_price + shipping_fee
+      
+    end
+
+
+    def free_product(current_cart)
+      free_product = Product.where(state: "ForFree").sample
+      # 如果 product 都沒有 Free 的就不繼續
+      unless free_product.blank?
+        free_product.price = 0
+        free_product.save
+        current_cart.add_item(free_product.id)
+        # 金額大於 800 送特定商品
+        # 把 products.state == "ForFree" 的商品變成 0 元
+      end
+    end
+memoize :free_product
   end
 end
 

@@ -45,7 +45,7 @@ class Cart
 
 # 總費用超過 1000 打 8 折，超過 500 免運費
   def total_price
-    final_price = cart_item_price >= 1000 ? cart_item_price * 0.8 + shipping_fee : cart_item_price + shipping_fee
+    Discount.cart_final_price(cart_item_price, shipping_fee)
   end
 
 # 因要使用 session，所以需讓回傳格式為 Hash
