@@ -26,10 +26,18 @@ module Discount
   end
 end
 
+# def price_with_discount
+#   return self.price if self.discount.nil? || self.discount.zero?
+#   self.price - (self.price / self.discount)
+# end
+
+# <%= product.price_with_discount %>
+
+
   # 如果金額超過 1000 @free_product = Product.where(state: "Forfree"].sample
   
   # current_cart 拉近來算，把折扣的金額算出來，在把current_cat 丟回去
-  
+
   # 是否有必要把 current_cart 拉近來變成 DiscountCart
   # 把 current_cart 拉進來後處理後，變成 @discount_cart
 

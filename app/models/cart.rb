@@ -15,12 +15,9 @@ class Cart
       found_item.increment
     else
       @items << CartItem.new(product_id)
-      # binding.pry
       # 模仿這裡，找到如有打折就 Discount.new，但問題是要傳什麼參數進去..
       # 如果把有打折的地方都送過去 Discount.new，感覺上是一個解法。
     end
-    # total_price
-    # binding.pry
   end
 
   def count_each_item
@@ -43,13 +40,12 @@ class Cart
 
 # 運費預設 150 
   def shipping_fee
-    shipping_fee = cart_item_price > 500 ? 0 : 150
+    shipping_fee = cart_item_price >= 500 ? 0 : 150
   end
 
-# 總費用超過 1000 打 8 折，超過 1500 免運費
+# 總費用超過 1000 打 8 折，超過 500 免運費
   def total_price
-    final_price = cart_item_price > 1000 ? cart_item_price * 0.8 + shipping_fee : cart_item_price + shipping_fee
-    # 如果金額 > 1000 打八折後，金額小於 1000 ，要加運費嗎
+    final_price = cart_item_price >= 1000 ? cart_item_price * 0.8 + shipping_fee : cart_item_price + shipping_fee
   end
 
 # 因要使用 session，所以需讓回傳格式為 Hash
