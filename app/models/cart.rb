@@ -19,11 +19,11 @@ class Cart
   end
 
   def count_each_item
-    count_item_array = items.map do |item|
-      item.inspect.split()[2].delete("@quantity=").to_i
-      # 這裡最後會取出 array ，再給 count_item_array.reduce 計算總數
+     @total_item = []
+    count_items = items.map do |item|
+      @total_item << item.quantity
     end
-    count_items = count_item_array.reduce {|sum, x| sum + x}
+    @total_item.reduce { |sum, x| sum + x }
   end
 
   # def empty?
