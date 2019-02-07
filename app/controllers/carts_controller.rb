@@ -4,7 +4,9 @@ class CartsController < ApplicationController
     # current_cart 來源自，CartsHelper
     # @cart ||= Cart.from_hash(session[Cart::SessionKey])
     if current_cart.total_price >= 800
-      Discount.free_product(current_cart)
+      # unless current_cart.free_product.persent?
+        Discount.free_product(current_cart)
+      # end
     end
     session[Cart::SessionKey] = current_cart.serialize
     # 最後存進 session 裡

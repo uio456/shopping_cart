@@ -15,8 +15,6 @@ class Cart
       found_item.increment
     else
       @items << CartItem.new(product_id)
-      # 模仿這裡，找到如有打折就 Discount.new，但問題是要傳什麼參數進去..
-      # 如果把有打折的地方都送過去 Discount.new，感覺上是一個解法。
     end
   end
 

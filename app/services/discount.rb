@@ -8,7 +8,6 @@ module Discount
       @product = the_product
       @quantity = the_quantity
       
-      # Bug 這裡ItemP 跟 VendorP 都有的話只執行一次
       if @product.state.eql?("ItemP") 
          cart_item_total
       elsif @product.state.eql?("VendorP")
@@ -19,28 +18,33 @@ module Discount
     end
 
     def cart_item_total
-      if @quantity >= 3
-        @watching_cart_item_discount = (@product.price * @quantity) - (@product.price * @quantity * 0.8) 
-      end
-      @quantity >= 3 ? @product.price * @quantity * 0.8 : @product.price * @quantity
+      @quantity >= 3 ? watching_cart_item_discount : @product.price * @quantity
+    end
+
+    def watching_cart_item_discount
+      @watching_cart_item_discount = (@product.price * @quantity) - (@product.price * @quantity * 0.8) 
+      # 得出打折金額
+      @product.price * @quantity * 0.8
+      # 回傳這條 cart_item 金額
     end
 
     def cart_final_price(cart_item_price, shipping_fee)
+      # 這裡 cart_item_price 已是加總所有 cart_item 金額
       if cart_item_price >= 1000
+        # binding.pry
         @watching_cart_discount = (cart_item_price) - (cart_item_price * 0.8) 
+        # 因超過 1000 所以 cart_item_price 打 8 折
         if @watching_cart_item_discount + @watching_cart_discount > 500
           return final_price = cart_item_price - (500 - @watching_cart_item_discount)
         end
       end
       final_price = cart_item_price >= 1000 ? cart_item_price * 0.8 + shipping_fee : cart_item_price + shipping_fee
-      
     end
-
 
     def free_product(current_cart)
       free_product = Product.where(state: "ForFree").sample
       # 如果 product 都沒有 Free 的就不繼續
-      unless free_product.blank?
+      if free_product.present? &&  check_free_product(current_cart)
         free_product.price = 0
         free_product.save
         current_cart.add_item(free_product.id)
@@ -48,7 +52,15 @@ module Discount
         # 把 products.state == "ForFree" 的商品變成 0 元
       end
     end
-memoize :free_product
+
+    #  如果 currem_cart 裡面已經有 Free Product 就給 false
+    def check_free_product(current_cart)
+      current_cart.items.map do |i|
+        return false if i.product.state == "ForFree"
+      end
+    end
+    
+
   end
 end
 
