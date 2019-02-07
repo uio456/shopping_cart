@@ -19,7 +19,11 @@ class Cart
   end
 
   def count_each_item
-    items.size
+    count_item_array = items.map do |item|
+      item.inspect.split()[2].delete("@quantity=").to_i
+      # 這裡最後會取出 array ，再給 count_item_array.reduce 計算總數
+    end
+    count_items = count_item_array.reduce {|sum, x| sum + x}
   end
 
   # def empty?
@@ -31,10 +35,6 @@ class Cart
     cart_item_price = items.reduce(0) { |sum, cart_item| sum + cart_item.price }
     # 總數由 0 開始計算，把每一個 cart_item 金額都算出來，在相加起來。
   end
-
-  # def check_price(cart_item_price)
-  #   final_price =  cart_item_price * 0.8 if cart_item_price > 1000
-  # end
 
 # 運費預設 150 
   def shipping_fee
@@ -54,13 +54,6 @@ class Cart
 
     { "items" => all_items }
   end
-
-  # def check_discount(current_cart)
-  #   binding.pry
-  #   current_cart
-  #   # current_cat.items.each do |item|
-  #   # end
-  # end
 
   class << self
     # 因為 cart 增加商品後，是透過 session 存起來，所以都需轉乘 hash 形式。

@@ -28,7 +28,7 @@
           <ul class="pull-right text-right nav navbar-nav">
             <li>
               <%= link_to cart_path do %>
-                <%= current_cart.count_each_item if current_cart.count_each_item > 0 %>
+                <%= current_cart.count_each_item %>
                 <i "<span class= 'glyphicon glyphicon-shopping-cart'>Cart</span></i>
               <% end %>
             </li>
