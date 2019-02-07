@@ -1,6 +1,8 @@
 module Discount
   class << self
 
+    MAXIMUM_DISCOUNT = 500
+
     def call
     end
 
@@ -23,22 +25,27 @@ module Discount
 
     def watching_cart_item_discount
       @watching_cart_item_discount = (@product.price * @quantity) - (@product.price * @quantity * 0.8) 
-      # 得出打折金額
-      @product.price * @quantity * 0.8
+      # 算出打折金額
+      if @watching_cart_item_discount > MAXIMUM_DISCOUNT
+         @watching_cart_item_discount = MAXIMUM_DISCOUNT
+         # 最多折 500 
+      end
+      @product.price * @quantity - @watching_cart_item_discount
       # 回傳這條 cart_item 金額
     end
+
+    # 把 @watching_cart_item_discount 限制在 500
 
     def cart_final_price(cart_item_price, shipping_fee)
       # 這裡 cart_item_price 已是加總所有 cart_item 金額
       if cart_item_price >= 1000
-        # binding.pry
-        @watching_cart_discount = (cart_item_price) - (cart_item_price * 0.8) 
-        # 因超過 1000 所以 cart_item_price 打 8 折
-        if @watching_cart_item_discount + @watching_cart_discount > 500
-          return final_price = cart_item_price - (500 - @watching_cart_item_discount)
-        end
+        # @watching_cart_discount = (cart_item_price) - (cart_item_price * 0.8) 
+        # 如果只限定最高折 500 ，就不需要算 @watching_cart_discount，直接用 500 MAXIMUM_DISCOUNT 代替。 
+        cart_item_price - (MAXIMUM_DISCOUNT - @watching_cart_item_discount)
+      else
+        cart_item_price + shipping_fee
       end
-      final_price = cart_item_price >= 1000 ? cart_item_price * 0.8 + shipping_fee : cart_item_price + shipping_fee
+      # final_price = cart_item_price >= 1000 ? cart_item_price * 0.8 + shipping_fee : cart_item_price + shipping_fee
     end
 
     def free_product(current_cart)
