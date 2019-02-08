@@ -2,6 +2,8 @@ module Discount
   class << self
 
     MAXIMUM_DISCOUNT = 500
+    DISCOUNT_DEADLINE = Time.new(2019,3,1)
+    # 暫定優惠只到 2019/2/28 23:59:59
 
     def call
     end
@@ -10,9 +12,9 @@ module Discount
       @product = the_product
       @quantity = the_quantity
       
-      if @product.state.eql?("ItemP") 
+      if @product.state.eql?("ItemP") && check_discount_deadline
          cart_item_total
-      elsif @product.state.eql?("VendorP")
+      elsif @product.state.eql?("VendorP") && check_discount_deadline
         cart_item_total
       else
         @product.price * @quantity
@@ -36,9 +38,9 @@ module Discount
 
     def cart_final_price(cart_item_price, shipping_fee)
       # 這裡 cart_item_price 已是所有 cart_item 金額
-      if cart_item_price >= 1000 
+      if cart_item_price >= 1000 && check_discount_deadline
         @watching_cart_discount = (cart_item_price) - (cart_item_price * 0.8) 
-        unless @watching_cart_item_discount + @watching_cart_discount <= 500
+        unless  @watching_cart_discount + @watching_cart_item_discount <= 500
           cart_item_price - (MAXIMUM_DISCOUNT - @watching_cart_item_discount) + shipping_fee
         end
         cart_item_price - @watching_cart_discount + shipping_fee
@@ -65,7 +67,10 @@ module Discount
         return false if i.product.state == "ForFree"
       end
     end
-    
+
+    def check_discount_deadline
+      DISCOUNT_DEADLINE > Time.now
+    end
 
   end
 end
