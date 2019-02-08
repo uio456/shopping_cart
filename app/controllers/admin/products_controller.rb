@@ -29,7 +29,7 @@ class Admin::ProductsController < Admin::BaseController
 
   def update
     if @product.update(product_params)
-      redirect_to admin_products_path, notice: "商品更新成功"
+      redirect_back(fallback_location: admin_products_path, notice: "商品更新成功")
     else
       redirect_back(fallback_location: admin_products_path, alert: @product.errors.full_messages.to_sentence)
     end
@@ -37,7 +37,7 @@ class Admin::ProductsController < Admin::BaseController
 
   def destroy
     @product.destroy
-    redirect_to products_path, notice: "商品已刪除"
+    redirect_to admin_products_path, notice: "商品已刪除"
   end
 
   private

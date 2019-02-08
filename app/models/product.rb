@@ -10,8 +10,8 @@ private
 
   def check_product_price
     if state == "Normal" || state == "Admin" || state == "SuperAdmin"
-      if price == 0
-        errors.add(:price, "can't not be 0")
+      if price <= 0
+        errors.add(:price, "can't not less then 0")
       end
     end
   end
