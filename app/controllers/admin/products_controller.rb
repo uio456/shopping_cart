@@ -31,7 +31,7 @@ class Admin::ProductsController < Admin::BaseController
     if @product.update(product_params)
       redirect_to admin_products_path, notice: "商品更新成功"
     else
-      render :edit
+      redirect_back(fallback_location: admin_products_path, alert: @product.errors.full_messages.to_sentence)
     end
   end
 
@@ -41,6 +41,7 @@ class Admin::ProductsController < Admin::BaseController
   end
 
   private
+
   def find_product
     @product = Product.find_by(id: params[:id])
     redirect_to products_path, notice: "無此商品" unless @product
@@ -49,4 +50,7 @@ class Admin::ProductsController < Admin::BaseController
   def product_params
     params.require(:product).permit(:title, :description, :price, :vendor_id, :state)
   end
+
+  
+
 end
