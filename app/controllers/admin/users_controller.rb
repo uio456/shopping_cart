@@ -9,11 +9,23 @@ class Admin::UsersController < Admin::BaseController
     
   end
 
+  # def update
+  #   if @user.update(user_params)
+  #     redirect_to admin_users_path, notice: "更新成功"
+  #   else
+  #     redirect_to admin_users_path, notice: "怪怪的"
+  #   end
+  # end
+
   def update
-    if @user.update(user_params)
-      redirect_to admin_users_path, notice: "更新成功"
+    @user = User.find(params[:id])
+    if @user.email == "admin@example.com"
+      flash[:alert] = "不要亂動~"
+      redirect_to admin_users_path
     else
-      redirect_to admin_users_path, notice: "怪怪的"
+      @user.update(role: params[:role])
+      flash[:notice] = "#{@user.name} 權限更新為 #{params[:role]}"
+      redirect_to admin_users_path
     end
   end
 
