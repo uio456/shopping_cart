@@ -16,6 +16,17 @@
       </td>
       <td><%= user.role %></td>
       <td>
+        <%= form_for  [:admin, user] do |f| %>
+          <%= f.radio_button :role, 'normal' %>
+          <%= label :role, 'normal' %>
+          <%= f.radio_button :role, 'admin' %>
+          <%= label :role, 'admin' %>
+          <%= f.radio_button :role, 'superAdmin' %>
+          <%= label :role, 'superAdmin' %>
+          <%= f.submit "更改權限", class: "btn btn-xs btn-default" %>
+        <% end %>  
+      </td>
+      <td>
         <%= link_to '編輯', edit_admin_user_path(user), class: "btn btn-xs btn-default" %>
       </td>
     </tr>
