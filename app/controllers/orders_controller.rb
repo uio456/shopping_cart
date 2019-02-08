@@ -13,7 +13,7 @@ class OrdersController < ApplicationController
     # order = Discount.new(@order).perform
     # @order = DiscountCheck.new(current_cart).perform
     # @order.order_discount(current_cart)
-    @order.add_order_items(current_cart)
+    @order.add_order_item(current_cart)
     if @order.save
       session[Cart::SessionKey] = nil
       redirect_to orders_path, notice: "new order created"
