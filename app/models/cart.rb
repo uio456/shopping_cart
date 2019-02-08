@@ -18,7 +18,7 @@ class Cart
     end
   end
 
-  def count_each_item
+  def count_items
     @total_item = []
     count_items = items.map do |item|
       @total_item << item.quantity
