@@ -34,18 +34,17 @@ module Discount
       # 回傳這條 cart_item 金額
     end
 
-    # 把 @watching_cart_item_discount 限制在 500
-
     def cart_final_price(cart_item_price, shipping_fee)
-      # 這裡 cart_item_price 已是加總所有 cart_item 金額
-      if cart_item_price >= 1000
-        # @watching_cart_discount = (cart_item_price) - (cart_item_price * 0.8) 
-        # 如果只限定最高折 500 ，就不需要算 @watching_cart_discount，直接用 500 MAXIMUM_DISCOUNT 代替。 
-        cart_item_price - (MAXIMUM_DISCOUNT - @watching_cart_item_discount)
-      else
-        cart_item_price + shipping_fee
+      # 這裡 cart_item_price 已是所有 cart_item 金額
+      if cart_item_price >= 1000 
+        @watching_cart_discount = (cart_item_price) - (cart_item_price * 0.8) 
+        unless @watching_cart_item_discount + @watching_cart_discount <= 500
+          cart_item_price - (MAXIMUM_DISCOUNT - @watching_cart_item_discount) + shipping_fee
+        end
+        cart_item_price - @watching_cart_discount + shipping_fee
       end
-      # final_price = cart_item_price >= 1000 ? cart_item_price * 0.8 + shipping_fee : cart_item_price + shipping_fee
+      cart_item_price + shipping_fee
+      # 還未限定折扣金額時的算法 final_price = cart_item_price >= 1000 ? cart_item_price * 0.8 + shipping_fee : cart_item_price + shipping_fee
     end
 
     def free_product(current_cart)
@@ -77,9 +76,6 @@ end
 # end
 
 # <%= product.price_with_discount %>
-
-
-  # 如果金額超過 1000 @free_product = Product.where(state: "Forfree"].sample
   
   # current_cart 拉近來算，把折扣的金額算出來，在把current_cat 丟回去
 
