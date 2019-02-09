@@ -40,6 +40,8 @@ module Discount
       # 這裡 cart_item_price 已是所有 cart_item 金額
       if cart_item_price >= 1000 && check_discount_deadline
         @watching_cart_discount = (cart_item_price) - (cart_item_price * 0.8) 
+        binding.pry
+        @watching_cart_item_discount = 0 if @watching_cart_item_discount == nil
         unless  @watching_cart_discount + @watching_cart_item_discount <= 500
           cart_item_price - (MAXIMUM_DISCOUNT - @watching_cart_item_discount) + shipping_fee
         end
