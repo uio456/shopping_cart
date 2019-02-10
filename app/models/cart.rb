@@ -36,6 +36,11 @@ class Cart
     # 總數由 0 開始計算，把每一個 cart_item 金額都算出來，在相加起來。
   end
 
+  def cart_item_discount_price
+    @cart_item_discount_price = items.reduce(0) { |sum, cart_item| sum + cart_item.discount_price }
+    
+  end
+
 # 運費預設 150 
   def shipping_fee
     shipping_fee = cart_item_price >= 500 ? 0 : 150
@@ -43,7 +48,7 @@ class Cart
 
 # 總費用超過 1000 打 8 折，超過 500 免運費
   def total_price
-    Discount.cart_final_price(cart_item_price, shipping_fee)
+    Discount.cart_final_price(cart_item_price, shipping_fee, cart_item_discount_price)
   end
 
 # 因要使用 session，所以需讓回傳格式為 Hash

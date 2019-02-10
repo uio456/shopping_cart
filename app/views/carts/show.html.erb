@@ -27,6 +27,10 @@
   </tbody>
   <tfood>
     <tr>
+      <td colspan="4">已經折扣。如超過500 ，總額會加回去</td>
+      <td><%= current_cart.cart_item_discount_price %></td>
+    </tr>
+    <tr>
       <td colspan="4">運費</td>
       <td><%= current_cart.shipping_fee %></td>
     </tr>

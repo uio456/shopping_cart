@@ -18,7 +18,11 @@ class CartItem
   end
 
   def price
-    Discount.cart_item_discount(product, quantity)
+    Discount.cart_item_total(product, quantity)
+  end
+
+  def discount_price
+    Discount.cart_item_discount_price(product, quantity)
   end
 
 end

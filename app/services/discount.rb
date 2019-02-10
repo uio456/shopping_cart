@@ -8,65 +8,73 @@ module Discount
     def call
     end
 
-    def cart_item_discount(the_product, the_quantity)
+    def cart_item_total(the_product, the_quantity)
       @product = the_product
       @quantity = the_quantity
       
       if @product.state.eql?("ItemP") && check_discount_deadline
-         cart_item_total
+         @quantity >= 3 ? watching_cart_item_discount : @product.price * @quantity
       elsif @product.state.eql?("VendorP") && check_discount_deadline
-        cart_item_total
+        @quantity >= 3 ? watching_cart_item_discount : @product.price * @quantity
       else
         @product.price * @quantity
       end
     end
 
-    def cart_item_total
-      @quantity >= 3 ? watching_cart_item_discount : @product.price * @quantity
-    end
-
     def watching_cart_item_discount
       @watching_cart_item_discount = (@product.price * @quantity) - (@product.price * @quantity * 0.8) 
+      @watching_cart_item_discount = 0 if @watching_cart_item_discount == nil
       # 算出打折金額
-      if @watching_cart_item_discount > MAXIMUM_DISCOUNT
-         @watching_cart_item_discount = MAXIMUM_DISCOUNT
-         # 最多折 500 
-      end
       @product.price * @quantity - @watching_cart_item_discount
       # 回傳這條 cart_item 金額
     end
 
-    def cart_final_price(cart_item_price, shipping_fee)
+    def cart_item_discount_price(the_product, the_quantity)
+       @discount_product = the_product
+       @discount_quantity = the_quantity
+      if @discount_product.state.eql?("ItemP") && check_discount_deadline
+        return price = (@discount_product.price * @discount_quantity * 0.2) if @discount_quantity >= 3
+        # 如有 3 件才打折，如 3件以下不打折，最底下回傳 price = 0
+      elsif @discount_product.state.eql?("VendorP") && check_discount_deadline
+        return price = (@discount_product.price * @discount_quantity * 0.2) if @discount_quantity >= 3
+      else
+        return price = 0
+      end
+        price = 0
+    end
+
+    def cart_final_price(cart_item_price, shipping_fee, cart_item_discount_price)
       # 這裡 cart_item_price 已是所有 cart_item 金額
+
       if cart_item_price >= 1000 && check_discount_deadline
         @watching_cart_discount = (cart_item_price) - (cart_item_price * 0.8) 
-        binding.pry
-        @watching_cart_item_discount = 0 if @watching_cart_item_discount == nil
-        unless  @watching_cart_discount + @watching_cart_item_discount <= 500
-          cart_item_price - (MAXIMUM_DISCOUNT - @watching_cart_item_discount) + shipping_fee
+        if  @watching_cart_discount + cart_item_discount_price <= MAXIMUM_DISCOUNT
+          cart_item_price - @watching_cart_discount + shipping_fee
+        else
+          # 沒限制 cart_item_discount_price ， 但如果折超過 500 ，這裡會加回去
+          cart_item_price - (MAXIMUM_DISCOUNT - cart_item_discount_price) + shipping_fee
         end
-        cart_item_price - @watching_cart_discount + shipping_fee
+      else
+        cart_item_price + shipping_fee
       end
-      cart_item_price + shipping_fee
       # 還未限定折扣金額時的算法 final_price = cart_item_price >= 1000 ? cart_item_price * 0.8 + shipping_fee : cart_item_price + shipping_fee
     end
 
     def free_product(current_cart)
       free_product = Product.where(state: "ForFree").sample
-      # 如果 product 都沒有 Free 的就不繼續
+      # 如果 product 不是 Free的 就不繼續，否則會出錯
       if free_product.present? &&  check_free_product(current_cart)
         free_product.price = 0
         free_product.save
         current_cart.add_item(free_product.id)
         # 金額大於 800 送特定商品
-        # 把 products.state == "ForFree" 的商品變成 0 元
       end
     end
 
-    #  如果 currem_cart 裡面已經有 Free Product 就給 false
+    #  如果 currem_cart 裡面已經有 Free Product 就不再送
     def check_free_product(current_cart)
-      current_cart.items.map do |i|
-        return false if i.product.state == "ForFree"
+      current_cart.items.map do |cart_item|
+        return false if cart_item.product.state == "ForFree"
       end
     end
 
@@ -81,18 +89,3 @@ end
 #   return self.price if self.discount.nil? || self.discount.zero?
 #   self.price - (self.price / self.discount)
 # end
-
-# <%= product.price_with_discount %>
-  
-  # current_cart 拉近來算，把折扣的金額算出來，在把current_cat 丟回去
-
-  # 是否有必要把 current_cart 拉近來變成 DiscountCart
-  # 把 current_cart 拉進來後處理後，變成 @discount_cart
-
-  # >>  item.product.state == "1"
-  # => true
-  # 目前可以判斷 product.state
-  # 判斷出來後去改變 @cart 的價錢
-  # 要在 cart 這邊就把折扣算出來
-  # 直接給 order 還有 order_item 使用
-  # 想想判斷出來後怎麼建立
