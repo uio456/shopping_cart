@@ -1,6 +1,6 @@
 class Product < ApplicationRecord
   belongs_to :vendor
-  validates_presence_of :vendor, :title, :price
+  validates_presence_of :vendor, :title, :price, :state
   validate :check_product_price
 
   scope :avalible_products, -> { where(state: ["VendorP", "Normal", "ItemP"])}
