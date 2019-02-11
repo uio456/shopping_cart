@@ -1,0 +1,31 @@
+<%= render partial: 'admin/shared/navtab' %>
+<%= @promotional.cart_item_discount %> <br>
+<%= @promotional.cart_discount %> <br>
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>Cart Item Discount</th>
+      <th>Cart Discount</th>
+      <th>Order Discount</th>
+      <th>ItemP</th>
+      <th>VendorP</th>
+      <th>ForFree</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <%= form_tag admin_promotional_path(@promotional), method: :patch, class: "form-inline" do %>
+          <%= select_tag :cart_item_discount, options_for_select(Promotional::DISCOUNT, @promotional.cart_item_discount), class: "form-control" %>
+          <%= submit_tag "變更折扣", class: "btn btn-primary" %>
+        <% end %>
+      </td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>

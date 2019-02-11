@@ -25,9 +25,7 @@ module Discount
     end
 
     def watching_cart_item_discount
-      binding.pry
-      @p = Promotional.first
-      @watching_cart_item_discount = (@product.price * @quantity) - (@product.price * @quantity * @p.cert_item_discount) 
+      @watching_cart_item_discount = (@product.price * @quantity) - (@product.price * @quantity * CART_ITEM_DISCOUNT) 
       # 算出打折金額
       # @watching_cart_item_discount = 0 if @watching_cart_item_discount == nil
       @product.price * @quantity - @watching_cart_item_discount
