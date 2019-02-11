@@ -1,9 +1,13 @@
 module Discount
   class << self
 
+    CART_ITEM_DISCOUNT = 0.8
+    CART_DISCOUNT = 0.8
+    ORDER_DISCOUNT = 1000
     MAXIMUM_DISCOUNT = 500
     DISCOUNT_DEADLINE = Time.new(2019,3,1)
     # 暫定優惠只到 2019/2/28 23:59:59
+    
 
     def call
     end
@@ -22,9 +26,9 @@ module Discount
     end
 
     def watching_cart_item_discount
-      @watching_cart_item_discount = (@product.price * @quantity) - (@product.price * @quantity * 0.8) 
-      @watching_cart_item_discount = 0 if @watching_cart_item_discount == nil
+      @watching_cart_item_discount = (@product.price * @quantity) - (@product.price * @quantity * CART_ITEM_DISCOUNT) 
       # 算出打折金額
+      # @watching_cart_item_discount = 0 if @watching_cart_item_discount == nil
       @product.price * @quantity - @watching_cart_item_discount
       # 回傳這條 cart_item 金額
     end
@@ -44,15 +48,14 @@ module Discount
     end
 
     def cart_final_price(cart_item_price, shipping_fee, cart_item_discount_price)
-      # 這裡 cart_item_price 已是所有 cart_item 金額
-
-      if cart_item_price >= 1000 && check_discount_deadline
-        @watching_cart_discount = (cart_item_price) - (cart_item_price * 0.8) 
-        if  @watching_cart_discount + cart_item_discount_price <= MAXIMUM_DISCOUNT
-          cart_item_price - @watching_cart_discount + shipping_fee
-        else
+      # 傳進來的 cart_item_price 已是所有 cart_item 金額
+      if cart_item_price >= ORDER_DISCOUNT && check_discount_deadline
+        @watching_cart_discount = (cart_item_price) - (cart_item_price * CART_DISCOUNT) 
+        if  @watching_cart_discount + cart_item_discount_price >= MAXIMUM_DISCOUNT
           # 沒限制 cart_item_discount_price ， 但如果折超過 500 ，這裡會加回去
           cart_item_price - (MAXIMUM_DISCOUNT - cart_item_discount_price) + shipping_fee
+        else
+          cart_item_price - @watching_cart_discount + shipping_fee
         end
       else
         cart_item_price + shipping_fee

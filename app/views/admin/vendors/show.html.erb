@@ -14,8 +14,8 @@
     <tr>
       <th>商品名稱</th>
       <td>售價</th>
-      <th>狀態</th>
       <th>#</th>
+      <th>狀態</th>
     </tr>
   </thead>
   <tbody>
@@ -25,6 +25,10 @@
         <%= product.title %>
       </td>
       <td><%= product.price %></td>
+      <td>
+        <%= link_to '編輯', edit_admin_product_path(product), class: "btn btn-xs btn-default" %>
+        <%= link_to '刪除', admin_product_path(product), method: "delete", data: { confirm: "確定刪除?" }, class: "btn btn-xs btn-default" %>
+      </td>
       <td>
         <%= form_for  [:admin, product] do |f| %>
           <%= f.submit "更改促銷狀態", class: "btn btn-xs btn-default" %>
@@ -37,10 +41,6 @@
           <%= f.radio_button :state, 'ForFree' %>
           <%= label :state, 'ForFree' %>
         <% end %>
-      </td>
-      <td>
-        <%= link_to '編輯', edit_admin_product_path(product), class: "btn btn-xs btn-default" %>
-        <%= link_to '刪除', admin_product_path(product), method: "delete", data: { confirm: "確定刪除?" }, class: "btn btn-xs btn-default" %>
       </td>
     </tr>
     <% end %>
