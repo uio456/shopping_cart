@@ -1,7 +1,7 @@
 module Discount
   class << self
 
-    CART_ITEM_DISCOUNT = 0.8
+    # CART_ITEM_DISCOUNT = 0.8
     CART_DISCOUNT = 0.8
     ORDER_DISCOUNT = 1000
     MAXIMUM_DISCOUNT = 500
@@ -25,7 +25,8 @@ module Discount
     end
 
     def watching_cart_item_discount
-      @watching_cart_item_discount = (@product.price * @quantity) - (@product.price * @quantity * CART_ITEM_DISCOUNT) 
+      @promotional = Promotional.first
+      @watching_cart_item_discount = (@product.price * @quantity) - (@product.price * @quantity * @promotional.cart_item_discount) 
       # 算出打折金額
       # @watching_cart_item_discount = 0 if @watching_cart_item_discount == nil
       @product.price * @quantity - @watching_cart_item_discount
@@ -36,10 +37,10 @@ module Discount
        @discount_product = the_product
        @discount_quantity = the_quantity
       if @discount_product.state.eql?("ItemP") && check_discount_deadline
-        return price = (@discount_product.price * @discount_quantity * 0.2) if @discount_quantity >= 3
+        return price = (@discount_product.price * @discount_quantity * (1 -  @promotional.cart_item_discount)) if @discount_quantity >= 3
         # 如有 3 件才打折，如 3件以下不打折，最底下回傳 price = 0
       elsif @discount_product.state.eql?("VendorP") && check_discount_deadline
-        return price = (@discount_product.price * @discount_quantity * 0.2) if @discount_quantity >= 3
+        return price = (@discount_product.price * @discount_quantity * (1 -  @promotional.cart_item_discount)) if @discount_quantity >= 3
       else
         return price = 0
       end
