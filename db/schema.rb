@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_04_121756) do
+ActiveRecord::Schema.define(version: 2019_02_11_124306) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -62,6 +62,18 @@ ActiveRecord::Schema.define(version: 2019_02_04_121756) do
     t.integer "category_id"
     t.integer "vendor_id"
     t.string "state"
+  end
+
+  create_table "promotionals", force: :cascade do |t|
+    t.float "cart_item_discount", default: 1.0
+    t.float "cart_discount", default: 1.0
+    t.integer "item_p", default: 3
+    t.integer "vendor_p", default: 3
+    t.integer "order_discount", default: 1000
+    t.integer "miximun_discount", default: 500
+    t.datetime "discount_deadline"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|

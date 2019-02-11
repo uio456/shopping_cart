@@ -7,7 +7,6 @@ module Discount
     MAXIMUM_DISCOUNT = 500
     DISCOUNT_DEADLINE = Time.new(2019,3,1)
     # 暫定優惠只到 2019/2/28 23:59:59
-    
 
     def call
     end
@@ -26,7 +25,9 @@ module Discount
     end
 
     def watching_cart_item_discount
-      @watching_cart_item_discount = (@product.price * @quantity) - (@product.price * @quantity * CART_ITEM_DISCOUNT) 
+      binding.pry
+      @p = Promotional.first
+      @watching_cart_item_discount = (@product.price * @quantity) - (@product.price * @quantity * @p.cert_item_discount) 
       # 算出打折金額
       # @watching_cart_item_discount = 0 if @watching_cart_item_discount == nil
       @product.price * @quantity - @watching_cart_item_discount
