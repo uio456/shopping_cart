@@ -22,5 +22,5 @@ vendor_list.each do |vendor|
 end
 
 #Default admin
-# User.create(email: "root@example.com", password: "12345678", role: "admin", name: "Duncan")
-# puts "Default admin create!"
+User.create(email: "admin@example.com", password: "12345678", role: "Admin", name: "Duncan")
+puts "Default admin create!"
