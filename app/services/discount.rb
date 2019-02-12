@@ -15,10 +15,11 @@ module Discount
       @product = the_product
       @quantity = the_quantity
       
+      @promotional = Promotional.first
       if @product.state.eql?("ItemP") && check_discount_deadline
-         @quantity >= 3 ? watching_cart_item_discount : @product.price * @quantity
+         @quantity >= @promotional.item_p ? watching_cart_item_discount : @product.price * @quantity
       elsif @product.state.eql?("VendorP") && check_discount_deadline
-        @quantity >= 3 ? watching_cart_item_discount : @product.price * @quantity
+        @quantity >= @promotional.vendor_p ? watching_cart_item_discount : @product.price * @quantity
       else
         @product.price * @quantity
       end
