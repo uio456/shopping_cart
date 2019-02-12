@@ -19,7 +19,7 @@ class Admin::UsersController < Admin::BaseController
 
   def update
     @user = User.find(params[:id])
-    if @user.email == "admin@example.com"
+    if @user.email == "root@example.com"
       flash[:alert] = "不要亂動~"
       redirect_to admin_users_path
     else
