@@ -65,8 +65,8 @@ ActiveRecord::Schema.define(version: 2019_02_11_124306) do
   end
 
   create_table "promotionals", force: :cascade do |t|
-    t.float "cart_item_discount", default: 1.0
-    t.float "cart_discount", default: 1.0
+    t.decimal "cart_item_discount", default: "1.0"
+    t.decimal "cart_discount", default: "1.0"
     t.integer "item_p", default: 3
     t.integer "vendor_p", default: 3
     t.integer "order_discount", default: 1000
