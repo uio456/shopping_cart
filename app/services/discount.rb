@@ -12,36 +12,38 @@ module Discount
     end
 
     def cart_item_total(the_product, the_quantity)
-      @product = the_product
-      @quantity = the_quantity
+      product = the_product
+      quantity = the_quantity
       
-      @promotional = Promotional.first
-      if @product.state.eql?("ItemP") && check_discount_deadline
-         @quantity >= @promotional.item_p ? watching_cart_item_discount : @product.price * @quantity
-      elsif @product.state.eql?("VendorP") && check_discount_deadline
-        @quantity >= @promotional.vendor_p ? watching_cart_item_discount : @product.price * @quantity
+      promotional = Promotional.first
+      if product.state.eql?("ItemP") && check_discount_deadline
+         quantity >= promotional.item_p ? watching_cart_item_discount(product, quantity) : product.price * quantity
+      elsif product.state.eql?("VendorP") && check_discount_deadline
+        quantity >= promotional.vendor_p ? watching_cart_item_discount(product, quantity) : product.price * quantity
       else
-        @product.price * @quantity
+        product.price * quantity
       end
     end
 
-    def watching_cart_item_discount
-      @promotional = Promotional.first
-      @watching_cart_item_discount = (@product.price * @quantity) - (@product.price * @quantity * @promotional.cart_item_discount) 
+    def watching_cart_item_discount(product, quantity)
+      promotional = Promotional.first
+      cart_item_discount_price = (product.price * quantity) - (product.price * quantity * promotional.cart_item_discount) 
       # 算出打折金額
-      # @watching_cart_item_discount = 0 if @watching_cart_item_discount == nil
-      @product.price * @quantity - @watching_cart_item_discount
+      # cart_item_discount_price = 0 if cart_item_discount_price == nil
+      product.price * quantity - cart_item_discount_price
       # 回傳這條 cart_item 金額
     end
 
     def cart_item_discount_price(the_product, the_quantity)
-       @discount_product = the_product
-       @discount_quantity = the_quantity
-      if @discount_product.state.eql?("ItemP") && check_discount_deadline
-        return price = (@discount_product.price * @discount_quantity * (1 -  @promotional.cart_item_discount)) if @discount_quantity >= 3
+       discount_product = the_product
+       discount_quantity = the_quantity
+
+       promotional = Promotional.first
+      if discount_product.state.eql?("ItemP") && check_discount_deadline
+        return price = (discount_product.price * discount_quantity * (1 -  promotional.cart_item_discount)) if discount_quantity >= 3
         # 如有 3 件才打折，如 3件以下不打折，最底下回傳 price = 0
-      elsif @discount_product.state.eql?("VendorP") && check_discount_deadline
-        return price = (@discount_product.price * @discount_quantity * (1 -  @promotional.cart_item_discount)) if @discount_quantity >= 3
+      elsif discount_product.state.eql?("VendorP") && check_discount_deadline
+        return price = (discount_product.price * discount_quantity * (1 -  promotional.cart_item_discount)) if discount_quantity >= 3
       else
         return price = 0
       end
@@ -50,12 +52,12 @@ module Discount
 
     def cart_final_price(cart_item_price, shipping_fee, cart_item_discount_price)
       # 傳進來的 cart_item_price 已是所有 cart_item 金額
-      @promotional = Promotional.first
-      if cart_item_price >= @promotional.order_discount && check_discount_deadline
-        @watching_cart_discount = (cart_item_price) - (cart_item_price * @promotional.cart_discount) 
-        if  @watching_cart_discount + cart_item_discount_price >= @promotional.miximun_discount
+      promotional = Promotional.first
+      if cart_item_price >= promotional.order_discount && check_discount_deadline
+        @watching_cart_discount = (cart_item_price) - (cart_item_price * promotional.cart_discount) 
+        if  @watching_cart_discount + cart_item_discount_price >= promotional.miximun_discount
           # 沒限制 cart_item_discount_price ， 但如果折超過 500 ，這裡會加回去
-          cart_item_price - (@promotional.miximum_discount - cart_item_discount_price) + shipping_fee
+          cart_item_price - (promotional.miximum_discount - cart_item_discount_price) + shipping_fee
         else
           cart_item_price - @watching_cart_discount + shipping_fee
         end
