@@ -1,24 +1,41 @@
-# README
+# Shopping Cart
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
 
-Things you may want to cover:
+安裝：
 
-* Ruby version
+```
+$ git clone https://github.com/uio456/shopping_cart.git
+$ cd shopping_cart
+$ bundle install
+```
 
-* System dependencies
+建立種子資料
 
-* Configuration
+```
+$ rails db:migrate
+$ rails db:seed
+$ rails dev:fake_products
+```
 
-* Database creation
+# User stories
 
-* Database initialization
+## 提供折扣功能
 
-* How to run the test suite
+- 特定商品滿 x 件折 z %
+- 特定供應商的場品滿 x 件折 z %
+- 訂單滿 x 元折 z %
+- 訂單滿 x 元免運費 
+- 訂單滿 x 贈送特定商品
+- 折扣可限定總共優惠 Y 元
+- 可限定日期後不再有任何折扣
+## 可成立訂單，無結帳功能
 
-* Services (job queues, cache servers, search engines, etc.)
+## 後台管理介面
 
-* Deployment instructions
+- 變更折扣 % 或條件
 
-* ...
+- 管理變更商品狀態
+
+- 管理人員權限
+
+  
