@@ -22,6 +22,7 @@ class Admin::UsersController < Admin::BaseController
     if @user.email == "root@example.com"
       flash[:alert] = "不要亂動~"
       redirect_to admin_users_path
+      # render :file => "public/401.html", :status => :unauthorized
     else
       @user.update(role: params[:role])
       flash[:notice] = "#{@user.name} 權限更新為 #{params[:role]}"
