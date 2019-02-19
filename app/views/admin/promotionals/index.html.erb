@@ -2,9 +2,8 @@
 <table class="table table-hover">
   <thead>
     <tr>
-      <th>特定商品滿幾件打折</th>
-      <th>特定商家商品滿幾件打折</th>
-      <th>Cart Item Discount</th>
+      <th>特定商品滿幾件打折 (Item_P)</th>
+      <th>Item Discount</th>
     </tr>
   </thead>
   <tbody>
@@ -17,21 +16,34 @@
       </td>
       <td>
         <%= form_tag admin_promotional_path(@promotional), method: :patch, class: "form-inline" do %>
+          <%= select_tag :item_discount, options_for_select(Promotional::DISCOUNT, @promotional.item_discount), class: "form-control" %>
+          <%= submit_tag "變更折扣", class: "btn btn-primary" %>
+        <% end %>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>特定商家商品滿幾件打折 (Vendor_P)</th>
+      <th>Vendor Discount</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <%= form_tag admin_promotional_path(@promotional), method: :patch, class: "form-inline" do %>
           <%= text_field_tag :vendor_p, @promotional.vendor_p, class: "form-control" %>
           <%= submit_tag "變更數量", class: "btn btn-primary" %>
         <% end %>
       </td>
       <td>
         <%= form_tag admin_promotional_path(@promotional), method: :patch, class: "form-inline" do %>
-          <%= select_tag :cart_item_discount, options_for_select(Promotional::DISCOUNT, @promotional.cart_item_discount), class: "form-control" %>
+          <%= select_tag :vendor_discount, options_for_select(Promotional::DISCOUNT, @promotional.vendor_discount), class: "form-control" %>
           <%= submit_tag "變更折扣", class: "btn btn-primary" %>
         <% end %>
-      </td>
-      <!-- <td> -->
-        <%#= form_tag admin_promotional_path(@promotional), method: :patch, class: "form-inline" do %>
-          <%#= text_field_tag :order_discount, @promotional.order_discount, class: "form-control" %>
-          <%#= submit_tag "變更折扣", class: "btn btn-primary" %>
-        <%# end %>
       </td>
     </tr>
   </tbody>
@@ -58,19 +70,14 @@
           <%= submit_tag "變更折扣", class: "btn btn-primary" %>
         <% end %>
       </td>
-      <td>
-        <%#= form_tag admin_promotional_path(@promotional), method: :patch, class: "form-inline" do %>
-          <%#= text_field_tag :order_discount, @promotional.order_discount, class: "form-control" %>
-          <%#= submit_tag "變更折扣", class: "btn btn-primary" %>
-        <%# end %>
-      </td>
     </tr>
   </tbody>
 </table>
 <!-- 
-# CART_ITEM_DISCOUNT = 0.8
+    CART_ITEM_DISCOUNT = 0.8
     CART_DISCOUNT = 0.8
     ORDER_DISCOUNT = 1000
     MAXIMUM_DISCOUNT = 500
     DISCOUNT_DEADLINE = Time.new(2019,3,1)
-    # 暫定優惠只到 2019/2/28 23:59:59 -->
+    暫定優惠只到 2019/2/28 23:59:59
+-->
