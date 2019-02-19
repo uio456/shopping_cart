@@ -27,7 +27,7 @@ module Discount
 
     def watching_cart_item_discount(product, quantity)
       promotional = Promotional.first
-      cart_item_discount_price = (product.price * quantity) - (product.price * quantity * promotional.cart_item_discount) 
+      cart_item_discount_price = (product.price * quantity) - (product.price * quantity * promotional.item_discount) 
       # 算出打折金額
       # cart_item_discount_price = 0 if cart_item_discount_price == nil
       product.price * quantity - cart_item_discount_price
@@ -40,10 +40,10 @@ module Discount
 
        promotional = Promotional.first
       if discount_product.state.eql?("ItemP") && check_discount_deadline
-        return price = (discount_product.price * discount_quantity * (1 -  promotional.cart_item_discount)) if discount_quantity >= 3
+        return price = (discount_product.price * discount_quantity * (1 -  promotional.item_discount)) if discount_quantity >= 3
         # 如有 3 件才打折，如 3件以下不打折，最底下回傳 price = 0
       elsif discount_product.state.eql?("VendorP") && check_discount_deadline
-        return price = (discount_product.price * discount_quantity * (1 -  promotional.cart_item_discount)) if discount_quantity >= 3
+        return price = (discount_product.price * discount_quantity * (1 -  promotional.vendor_discount)) if discount_quantity >= 3
       else
         return price = 0
       end
