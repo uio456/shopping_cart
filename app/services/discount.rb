@@ -40,10 +40,10 @@ module Discount
 
        promotional = Promotional.first
       if discount_product.state.eql?("ItemP") && check_discount_deadline
-        return price = (discount_product.price * discount_quantity * (1 -  promotional.item_discount)) if discount_quantity >= 3
+        return price = (discount_product.price * discount_quantity * (1 -  promotional.item_discount)) if discount_quantity >= promotional.item_p
         # 如有 3 件才打折，如 3件以下不打折，最底下回傳 price = 0
       elsif discount_product.state.eql?("VendorP") && check_discount_deadline
-        return price = (discount_product.price * discount_quantity * (1 -  promotional.vendor_discount)) if discount_quantity >= 3
+        return price = (discount_product.price * discount_quantity * (1 -  promotional.vendor_discount)) if discount_quantity >= promotional.vendor_p
       else
         return price = 0
       end
