@@ -19,11 +19,11 @@ class Cart
   end
 
   def count_items
-    @total_item = []
+    @total_items = []
     count_items = items.map do |item|
-      @total_item << item.quantity
+      @total_items << item.quantity
     end
-    @total_item.reduce { |sum, x| sum + x }
+    @total_items.reduce { |sum, x| sum + x }
   end
 
   # def empty?
