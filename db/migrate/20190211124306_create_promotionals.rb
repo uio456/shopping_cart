@@ -1,6 +1,7 @@
 class CreatePromotionals < ActiveRecord::Migration[5.2]
   def change
     create_table :promotionals do |t|
+      t.string :title, null: false
       t.integer :item_p, default: 3
       t.decimal :item_discount, default: 1
       t.integer :vendor_p, default: 3
