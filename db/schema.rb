@@ -69,7 +69,7 @@ ActiveRecord::Schema.define(version: 2019_02_11_124306) do
     t.decimal "item_discount", default: "1.0"
     t.integer "vendor_p", default: 3
     t.decimal "vendor_discount", default: "1.0"
-    t.integer "order_discount", default: 1000
+    t.integer "order_p", default: 1000
     t.decimal "cart_discount", default: "1.0"
     t.integer "miximun_discount", default: 500
     t.datetime "discount_deadline"
