@@ -66,7 +66,7 @@
       </td>
       <td>
         <%= form_tag admin_promotional_path(@promotional), method: :patch, class: "form-inline" do %>
-          <%= select_tag :cart_discount, options_for_select(Promotional::DISCOUNT, @promotional.cart_discount), class: "form-control" %>
+          <%= select_tag :order_discount, options_for_select(Promotional::DISCOUNT, @promotional.order_discount), class: "form-control" %>
           <%= submit_tag "變更折扣", class: "btn btn-primary" %>
         <% end %>
       </td>
