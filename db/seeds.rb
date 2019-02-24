@@ -25,4 +25,4 @@ end
 User.create(email: "root@example.com", password: "12345678", role: "Admin", name: "Duncan")
 puts "Default admin create!"
 
-#寫一個 Promotional.create
+Promotional.create(title: "promotional")
