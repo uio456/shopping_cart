@@ -60,7 +60,7 @@
     <tr>
       <td>
         <%= form_tag admin_promotional_path(@promotional), method: :patch, class: "form-inline" do %>
-          <%= text_field_tag :order_discount, @promotional.order_discount, class: "form-control" %>
+          <%= text_field_tag :order_p, @promotional.order_p, class: "form-control" %>
           <%= submit_tag "變更額度", class: "btn btn-primary" %>
         <% end %>
       </td>

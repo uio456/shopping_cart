@@ -1,4 +1,5 @@
 class Promotional < ApplicationRecord
+  validates :title, uniqueness: true
 
   DISCOUNT = {
     "原價" => 1,
