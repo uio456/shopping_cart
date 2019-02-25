@@ -1,7 +1,7 @@
 class Admin::PromotionalsController < Admin::BaseController
+  before_action :find_promotional, only: [:index, :edit, :update]
 
   def index
-    @promotional = Promotional.first
     @update_promotionl = Promotional.new
     @user = User.first
   end
@@ -10,11 +10,9 @@ class Admin::PromotionalsController < Admin::BaseController
   end
 
   def edit
-    @promotional = Promotional.first
   end
 
   def update
-      @promotional = Promotional.first
     if @promotional.update(promotional_params)
       redirect_back(fallback_location: admin_promotionals_path, notice: "更新成功")
     else
