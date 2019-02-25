@@ -23,7 +23,7 @@ class Cart
     items.map do |item|
       @total_items << item.quantity
     end
-    @total_items.reduce { |sum, x| sum + x }
+    @total_items.sum
   end
 
   # def empty?
