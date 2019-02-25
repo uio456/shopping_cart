@@ -57,7 +57,7 @@ module Discount
         @watching_cart_discount = (cart_item_price) - (cart_item_price * promotional.order_discount) 
         if  @watching_cart_discount + cart_item_discount_price >= promotional.miximun_discount
           # 沒限制 cart_item_discount_price ， 但如果折超過 500 ，這裡會加回去
-          cart_item_price - (promotional.miximum_discount - cart_item_discount_price) + shipping_fee
+          cart_item_price - (promotional.miximun_discount - cart_item_discount_price) + shipping_fee
         else
           cart_item_price - @watching_cart_discount + shipping_fee
         end

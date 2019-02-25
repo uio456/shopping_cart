@@ -38,12 +38,12 @@ class Cart
 
   def cart_item_discount_price
     @cart_item_discount_price = items.reduce(0) { |sum, cart_item| sum + cart_item.discount_price }
-    
   end
 
 # 運費預設 150 
   def shipping_fee
     shipping_fee = cart_item_price >= 500 ? 0 : 150
+    # 運費改成可以從後台輸入
   end
 
 # 總費用超過 1000 打 8 折，超過 500 免運費
