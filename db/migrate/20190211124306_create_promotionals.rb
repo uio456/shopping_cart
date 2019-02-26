@@ -10,6 +10,7 @@ class CreatePromotionals < ActiveRecord::Migration[5.2]
       t.decimal :order_discount, default: 1
       t.integer :miximun_discount, default: 500
       t.datetime :discount_deadline
+      t.decimal :shipping_fee, default: 150
 
       t.timestamps
     end

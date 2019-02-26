@@ -73,6 +73,24 @@
     </tr>
   </tbody>
 </table>
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>運費</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <%= form_tag admin_promotional_path(@promotional), method: :patch, class: "form-inline" do %>
+          <%= text_field_tag :shipping_fee, @promotional.shipping_fee, class: "form-control" %>
+          <%= submit_tag "變更運費", class: "btn btn-primary" %>
+        <% end %>
+      </td>
+    </tr>
+  </tbody>
+</table>
 <!-- 
     CART_ITEM_DISCOUNT = 0.8
     CART_DISCOUNT = 0.8
