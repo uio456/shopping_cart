@@ -27,7 +27,7 @@ class Admin::PromotionalsController < Admin::BaseController
   end
 
   def promotional_params
-    params.permit(:item_p, :item_discount, :vendor_p, :vendor_discount, :order_p, :order_discount, :miximun_discount, :discount_deadline, :shipping_fee)
+    params.permit(:item_p, :item_discount, :vendor_p, :vendor_discount, :order_p, :order_discount, :miximun_discount, :discount_deadline, :shipping_fee, :discount_deadline)
   end
 
 end

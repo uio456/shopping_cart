@@ -91,6 +91,24 @@
     </tr>
   </tbody>
 </table>
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>折扣時限</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <%= form_tag admin_promotional_path(@promotional), method: :patch, class: "form-inline" do %>
+          <%= date_field :discount_deadline, @promotional.discount_deadline, class: "form-control" %>
+          <%= submit_tag "變更時限", class: "btn btn-primary" %>
+        <% end %>
+      </td>
+    </tr>
+  </tbody>
+</table>
 <!-- 
     CART_ITEM_DISCOUNT = 0.8
     CART_DISCOUNT = 0.8
