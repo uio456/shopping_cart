@@ -3,7 +3,7 @@ class ProductsController < ApplicationController
   # before_action :authenticate_user!
 
   def index
-    @products = Product.avalible_products
+    @products = Product.avalible_products.includes(:vendor)
   end
 
   # def new
