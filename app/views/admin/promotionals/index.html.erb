@@ -95,6 +95,25 @@
 <table class="table table-hover">
   <thead>
     <tr>
+      <th>折扣上限</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <%= form_tag admin_promotional_path(@promotional), method: :patch, class: "form-inline" do %>
+          <%= text_field_tag :miximun_discount, @promotional.miximun_discount, class: "form-control" %>
+          <!-- miximun_discount 拼錯了 -->
+          <%= submit_tag "變更時限", class: "btn btn-primary" %>
+        <% end %>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<table class="table table-hover">
+  <thead>
+    <tr>
       <th>折扣時限</th>
     </tr>
   </thead>
