@@ -43,7 +43,7 @@ class Cart
 # 運費預設 150 
   def shipping_fee
     promotional = Promotional.first
-    shipping_fee = cart_item_price >= promotional.miximun_discount ? 0 : promotional.shipping_fee
+    shipping_fee = cart_item_price >= promotional.maximum_discount ? 0 : promotional.shipping_fee
     # 運費改成可以從後台輸入
   end
 

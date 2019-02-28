@@ -102,8 +102,7 @@
     <tr>
       <td>
         <%= form_tag admin_promotional_path(@promotional), method: :patch, class: "form-inline" do %>
-          <%= text_field_tag :miximun_discount, @promotional.miximun_discount, class: "form-control" %>
-          <!-- miximun_discount 拼錯了 -->
+          <%= text_field_tag :maximum_discount, @promotional.maximum_discount, class: "form-control" %>
           <%= submit_tag "變更時限", class: "btn btn-primary" %>
         <% end %>
       </td>
