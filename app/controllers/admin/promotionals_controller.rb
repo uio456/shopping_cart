@@ -2,8 +2,7 @@ class Admin::PromotionalsController < Admin::BaseController
   before_action :find_promotional, only: [:index, :edit, :update]
 
   def index
-    @update_promotionl = Promotional.new
-    @user = User.first
+    # @update_promotionl = Promotional.new
   end
 
   def show
