@@ -102,7 +102,8 @@
     <tr>
       <td>
         <%= form_tag admin_promotional_path(@promotional), method: :patch, class: "form-inline" do %>
-          <%= date_field :discount_deadline, @promotional.discount_deadline, class: "form-control" %>
+        <h4>目前折扣時限至：<%= @promotional.discount_deadline %></h4>
+          <%= date_field_tag :discount_deadline, @promotional.discount_deadline, class: "form-control" %>
           <%= submit_tag "變更時限", class: "btn btn-primary" %>
         <% end %>
       </td>
@@ -110,6 +111,10 @@
   </tbody>
 </table>
 <!-- 
+
+    可在這做送免費商品的選擇
+    看看怎麼在表單顯示時間，更新時間
+
     CART_ITEM_DISCOUNT = 0.8
     CART_DISCOUNT = 0.8
     ORDER_DISCOUNT = 1000
