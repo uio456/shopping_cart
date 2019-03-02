@@ -5,10 +5,12 @@ module Discount
     # CART_DISCOUNT = 0.8
     # ORDER_DISCOUNT = 1000
     # MAXIMUM_DISCOUNT = 500
-    DISCOUNT_DEADLINE = Time.new(2019,3,1)
+    # DISCOUNT_DEADLINE = Time.new(2019,4,1)
     # 暫定優惠只到 2019/2/28 23:59:59
 
-    def call
+    def check_discount_deadline
+      promotional = Promotional.first
+      promotional.discount_deadline > Time.now
     end
 
     def cart_item_total(the_product, the_quantity)
@@ -83,10 +85,6 @@ module Discount
       current_cart.items.map do |cart_item|
         return false if cart_item.product.state == "ForFree"
       end
-    end
-
-    def check_discount_deadline
-      DISCOUNT_DEADLINE > Time.now
     end
 
   end
