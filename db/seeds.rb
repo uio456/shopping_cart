@@ -26,3 +26,8 @@ User.create(email: "root@example.com", password: "12345678", role: "Admin", name
 puts "Default admin create!"
 
 Promotional.create(title: "promotional")
+
+
+# 按下結帳時可以抽獎，後台給一個 rand(10) 如果是 7 就在打五折
+# Create Staff Table
+# Normal ItemP VndorP ForFree 轉成中文 I18n 或是 helper_text
