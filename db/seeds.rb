@@ -25,7 +25,7 @@ end
 User.create(email: "root@example.com", password: "12345678", role: "Admin", name: "Duncan")
 puts "Default admin create!"
 
-Promotional.create(title: "promotional")
+Promotional.create(title: "promotional", discount_deadline: Time.now+1.years)
 
 
 price = [100, 200, 300]
@@ -34,7 +34,7 @@ price = [100, 200, 300]
     title: FFaker::Product.product_name,
     price: price.sample,
     vendor_id: Vendor.all.sample.id,
-    state: "Normal"
+    state: "normal"
   )
   puts p.title
 end
@@ -42,4 +42,3 @@ end
 
 # 按下結帳時可以抽獎，後台給一個 rand(10) 如果是 7 就在打五折
 # Create Staff Table
-# Normal ItemP VndorP ForFree 轉成中文 I18n 或是 helper_text

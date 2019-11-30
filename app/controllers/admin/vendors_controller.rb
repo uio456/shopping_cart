@@ -8,6 +8,6 @@ class Admin::VendorsController < Admin::BaseController
   def update_state
     @vendor = Vendor.find(params[:id])
     VendorService.perform(@vendor)
-    redirect_back(fallback_location: admin_products_path, notice: "All #{@vendor.name} Vandor roducts state is change to ---> VendorP!")
+    redirect_back(fallback_location: admin_products_path, notice: "All #{@vendor.name} Vandor roducts state is change to ---> vendor_p!")
   end
 end

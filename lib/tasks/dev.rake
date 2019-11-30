@@ -3,7 +3,7 @@ namespace :dev do
   task rebuild: ["db:drop", "db:setup", :fake, "db:seed"]
   task fake: [:fake_product, :fake_user, :fake_order]
 
-  product_state = ["Normal", "ItemP", "VendorP"]
+  product_state = ["normal", "item_p", "vendor_p"]
 
   task fake_products: :environment do
     puts "Create fake products for development"

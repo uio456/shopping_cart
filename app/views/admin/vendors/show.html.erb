@@ -32,14 +32,14 @@
       <td>
         <%= form_for  [:admin, product] do |f| %>
           <%= f.submit "更改促銷狀態", class: "btn btn-xs btn-default" %>
-          <%= f.radio_button :state, 'Normal' %>
-          <%= label :state, 'Normal' %>
-          <%= f.radio_button :state, 'ItemP' %>
-          <%= label :state, 'ItemP' %>
-          <%= f.radio_button :state, 'VendorP' %>
-          <%= label :state, 'VendorP' %>
-          <%= f.radio_button :state, 'ForFree' %>
-          <%= label :state, 'ForFree' %>
+          <%= f.radio_button :state, 'normal' %>
+          <%= label :state, 'normal' %>
+          <%= f.radio_button :state, 'item_p' %>
+          <%= label :state, 'item_p' %>
+          <%= f.radio_button :state, 'vendor_p' %>
+          <%= label :state, 'vendor_p' %>
+          <%= f.radio_button :state, 'for_free' %>
+          <%= label :state, 'for_free' %>
         <% end %>
       </td>
     </tr>
