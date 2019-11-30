@@ -28,6 +28,18 @@ puts "Default admin create!"
 Promotional.create(title: "promotional")
 
 
+price = [100, 200, 300]
+30.times do |i|
+  p = Product.create(
+    title: FFaker::Product.product_name,
+    price: price.sample,
+    vendor_id: Vendor.all.sample.id,
+    state: "Normal"
+  )
+  puts p.title
+end
+
+
 # 按下結帳時可以抽獎，後台給一個 rand(10) 如果是 7 就在打五折
 # Create Staff Table
 # Normal ItemP VndorP ForFree 轉成中文 I18n 或是 helper_text
