@@ -19,17 +19,22 @@ module Discount
       
       promotional = Promotional.first
       if product.state.eql?("item_p") && check_discount_deadline
-         quantity >= promotional.item_p ? watching_cart_item_discount(product, quantity) : product.price * quantity
+         quantity >= promotional.item_p ? watching_cart_item_discount(product, quantity, "item_p") : product.price * quantity
       elsif product.state.eql?("vendor_p") && check_discount_deadline
-        quantity >= promotional.vendor_p ? watching_cart_item_discount(product, quantity) : product.price * quantity
+        quantity >= promotional.vendor_p ? watching_cart_item_discount(product, quantity, "vendor_p") : product.price * quantity
       else
         product.price * quantity
       end
     end
 
-    def watching_cart_item_discount(product, quantity)
+    def watching_cart_item_discount(product, quantity, discount_type)
       promotional = Promotional.first
-      cart_item_discount_price = (product.price * quantity) - (product.price * quantity * promotional.item_discount) 
+      if discount_type == "item_p"
+        discount = promotional.item_discount
+      else
+        discount = promotional.vendor_discount
+      end
+      cart_item_discount_price = (product.price * quantity) - (product.price * quantity * discount)
       # 算出打折金額
       # cart_item_discount_price = 0 if cart_item_discount_price == nil
       product.price * quantity - cart_item_discount_price
