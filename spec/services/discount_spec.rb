@@ -19,12 +19,19 @@ RSpec.describe do
         product_1.vendor_p!
         product_2.vendor_p!
       }
+
+      it "2 vendor product" do
+        cart.add_item(product_0)
+        cart.add_item(product_0)
+        order_price = 200
+        expect(cart.total_price.to_i).to be((order_price + cart.shipping_fee).to_i )
+      end
+
       it "3 vendor product" do
         cart.add_item(product_0)
         cart.add_item(product_0)
         cart.add_item(product_0)
         order_price = (300 * promotiona.vendor_discount)
-        # binding.pry
         expect(cart.total_price.to_i).to be((order_price + cart.shipping_fee).to_i )
       end
 
@@ -36,6 +43,16 @@ RSpec.describe do
         order_price = (300 * promotiona.vendor_discount) + 100
         expect(cart.total_price.to_i).to be((order_price + cart.shipping_fee).to_i )
       end
+
+      it "3 vendor product, 2 normal product" do
+        cart.add_item(product_0)
+        cart.add_item(product_0)
+        cart.add_item(product_0)
+        cart.add_item(product_1)
+        cart.add_item(product_1)
+        order_price = (300 * promotiona.vendor_discount) + 200
+        expect(cart.total_price.to_i).to be((order_price + cart.shipping_fee).to_i )
+      end
     end
 
     context "相同商品滿 3 件打 7 折" do
@@ -44,6 +61,14 @@ RSpec.describe do
         product_1.item_p!
         product_2.item_p!
       }
+
+      it "2 item product" do
+        cart.add_item(product_0)
+        cart.add_item(product_0)
+        order_price = 200
+        expect(cart.total_price.to_i).to be((order_price + cart.shipping_fee).to_i )
+      end
+
       it "3 item product" do
         cart.add_item(product_0)
         cart.add_item(product_0)
@@ -58,6 +83,16 @@ RSpec.describe do
         cart.add_item(product_0)
         cart.add_item(product_1)
         order_price = (300 * promotiona.item_discount) + 100
+        expect(cart.total_price.to_i).to be((order_price + cart.shipping_fee).to_i )
+      end
+
+      it "3 item product, 1 normal product" do
+        cart.add_item(product_0)
+        cart.add_item(product_0)
+        cart.add_item(product_0)
+        cart.add_item(product_1)
+        cart.add_item(product_1)
+        order_price = (300 * promotiona.item_discount) + 200
         expect(cart.total_price.to_i).to be((order_price + cart.shipping_fee).to_i )
       end
     end
