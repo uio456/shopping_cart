@@ -61,7 +61,7 @@ module Discount
       # 傳進來的 cart_item_price 已是所有 cart_item 金額
       promotional = Promotional.first
       if cart_item_price >= promotional.order_p && check_discount_deadline
-        @watching_cart_discount = (cart_item_price) - (cart_item_price * promotional.order_discount) 
+        @watching_cart_discount = (cart_item_price) - (cart_item_price * promotional.order_discount)
         if  @watching_cart_discount + cart_item_discount_price >= promotional.maximum_discount
           # 沒限制 cart_item_discount_price ， 但如果折超過 500 ，這裡會加回去
           cart_item_price - (promotional.maximum_discount - cart_item_discount_price) + shipping_fee

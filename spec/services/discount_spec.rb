@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe do
   let!(:cart) {Cart.new}
   let!(:promotiona) {Promotional.create(title: "promotional", discount_deadline: Time.now+1.years,
-                                        vendor_discount: 0.8, item_discount: 0.7)}
+                                        vendor_discount: 0.8, item_discount: 0.7, order_discount: 0.6, maximum_discount: 10000)}
   let!(:vendor) {Vendor.create(name: "Eslite")}
   5.times do |i|
     let!("product_#{i}") {Product.create( title: FFaker::Product.product_name,
@@ -93,6 +93,38 @@ RSpec.describe do
         cart.add_item(product_1)
         cart.add_item(product_1)
         order_price = (300 * promotiona.item_discount) + 200
+        expect(cart.total_price.to_i).to be((order_price + cart.shipping_fee).to_i )
+      end
+    end
+
+    context "總額滿 100 件打 6 折" do
+      before {
+        product_0.price = 500
+        product_0.save
+        product_1.price = 500
+        product_1.save
+        product_2.price = 500
+        product_2.save
+      }
+
+      it "product price 500" do
+        cart.add_item(product_0)
+        order_price = 500
+        expect(cart.total_price.to_i).to be((order_price + cart.shipping_fee).to_i )
+      end
+
+      it "product price 1000" do
+        cart.add_item(product_0)
+        cart.add_item(product_0)
+        order_price = (1000 * promotiona.order_discount)
+        expect(cart.total_price.to_i).to be((order_price + cart.shipping_fee).to_i )
+      end
+
+      it "product price 1500" do
+        cart.add_item(product_0)
+        cart.add_item(product_0)
+        cart.add_item(product_1)
+        order_price = (1500 * promotiona.order_discount)
         expect(cart.total_price.to_i).to be((order_price + cart.shipping_fee).to_i )
       end
     end
