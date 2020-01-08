@@ -22,7 +22,7 @@ vendor_list.each do |vendor|
 end
 
 #Default admin
-User.create(email: "root@example.com", password: "12345678", role: "Admin", name: "Duncan")
+User.create(email: "root@example.com", password: "12345678", role: "superman", name: "Duncan")
 puts "Default admin create!"
 
 Promotional.create(title: "promotional", discount_deadline: Time.now+1.years)

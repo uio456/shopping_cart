@@ -27,7 +27,7 @@ namespace :dev do
     puts "Create fake users for development"
     User.destroy_all
 
-    User.create!(email: "root@example.com", password: "12345678", role: "admin")
+    User.create!(email: "root@example.com", password: "12345678", role: "superman")
     puts "create default admin"
 
     10.times do |i|

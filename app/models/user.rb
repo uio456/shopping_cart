@@ -6,10 +6,10 @@ class User < ApplicationRecord
 
   has_many :orders
 
-  ROLE = ["normal", "admin", "SuperAdmin"]
+  ROLE = ["normal", "admin", "superman"]
 
   def admin?
-    role == "admin"
+    role != "normal"
   end
 
 end
