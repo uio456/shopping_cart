@@ -5,7 +5,7 @@ namespace :dev do
 
   product_state = ["normal", "item_p", "vendor_p"]
 
-  task fake_products: :environment do
+  task fake_product: :environment do
     puts "Create fake products for development"
     Product.destroy_all
     # 如果重新產生 product 也要把 current_cart 清掉
@@ -23,23 +23,23 @@ namespace :dev do
     puts "now you have #{Product.count} products record"
   end
 
-  # task fake_user: :environment do
-  #   puts "Create fake users for development"
-  #   User.destroy_all
+  task fake_user: :environment do
+    puts "Create fake users for development"
+    User.destroy_all
 
-  #   User.create!(email: "root@example.com", password: "12345678", role: "admin")
-  #   puts "create default admin"
+    User.create!(email: "root@example.com", password: "12345678", role: "admin")
+    puts "create default admin"
 
-  #   10.times do |i|
-  #     User.create!(
-  #       email: FFaker::Internet.email,
-  #       password: "12345678"
-  #     )
-  #   end
-  #   puts "now you have #{User.count} user record"
-  # end
+    10.times do |i|
+      User.create!(
+        email: FFaker::Internet.email,
+        password: "12345678"
+      )
+    end
+    puts "now you have #{User.count} user record"
+  end
 
-  # task fake_order: :environment do
+  task fake_order: :environment do
   #   puts "Create fake orders for development"
   #   Order.destroy_all
   #   Cart.destroy_all
@@ -69,6 +69,6 @@ namespace :dev do
   #     cart.destroy
   #   end
   #   puts "now you have #{Order.count} order record"
-  # end
+  end
 
 end
