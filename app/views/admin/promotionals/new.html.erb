@@ -1,0 +1,15 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12 col-md-12">
+      <%= form_for  [:admin, @promotionl] do |f| %>
+        <div class="form-group">
+          <%= f.text_field :title, placeholder: "折扣名稱", class: "form-control"%>
+        </div>
+        <div class="form-group">
+          <%= f.submit "Submit", class: "btn btn-primary" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+          

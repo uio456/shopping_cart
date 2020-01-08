@@ -16,7 +16,7 @@ Rails.application.routes.draw do
 
   namespace :admin, path: :make_backend_url_abstruse do
     resources :products
-    resources :promotionals, only:[:index, :show, :edit, :update]
+    resources :promotionals
     resources :users, only:[:index, :edit, :update]
     resources :vendors do
       member do
