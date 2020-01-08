@@ -12,13 +12,15 @@ class Admin::PromotionalsController < Admin::BaseController
   end
 
    def create
-    @promotional = Promotional.new(promotional_params)
-    if @promotional.save
-      redirect_to admin_promotionals_path, notice: "新增商品完成"
-    else
-      flash.alert = Errorhandle.call(@promotional)
-      render :new
-    end
+    # @promotional = Promotional.new(promotional_params)
+    # FIX ME
+    Promotional.create(title: "promotional", discount_deadline: Time.now+1.years)
+    # if @promotional.save
+      redirect_to admin_promotionals_path, notice: "新增折扣完成"
+    # else
+      # flash.alert = Errorhandle.call(@promotional)
+      # render :new
+    # end
   end
 
   def edit
