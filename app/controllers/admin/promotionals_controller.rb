@@ -14,7 +14,7 @@ class Admin::PromotionalsController < Admin::BaseController
    def create
     # @promotional = Promotional.new(promotional_params)
     # FIX ME
-    Promotional.create(discount_deadline: Time.now+1.years)
+    Promotional.create(title: "折扣", discount_deadline: Time.now+1.years)
     # if @promotional.save
       redirect_to admin_promotionals_path, notice: "新增折扣完成"
     # else
