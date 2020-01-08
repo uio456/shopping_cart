@@ -14,7 +14,7 @@ class Admin::PromotionalsController < Admin::BaseController
    def create
     # @promotional = Promotional.new(promotional_params)
     # FIX ME
-    Promotional.create(title: "promotional", discount_deadline: Time.now+1.years)
+    Promotional.create(discount_deadline: Time.now+1.years)
     # if @promotional.save
       redirect_to admin_promotionals_path, notice: "新增折扣完成"
     # else
@@ -41,7 +41,7 @@ class Admin::PromotionalsController < Admin::BaseController
   end
 
   def promotional_params
-    params.permit(:title, :item_p, :item_discount, :vendor_p, :vendor_discount, :order_p, :order_discount, :maximum_discount, :discount_deadline, :shipping_fee, :discount_deadline)
+    params.permit(:item_p, :item_discount, :vendor_p, :vendor_discount, :order_p, :order_discount, :maximum_discount, :discount_deadline, :shipping_fee, :discount_deadline)
   end
 
 end

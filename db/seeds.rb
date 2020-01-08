@@ -25,7 +25,7 @@ end
 User.create(email: "root@example.com", password: "12345678", role: "superman", name: "Duncan")
 puts "Default admin create!"
 
-Promotional.create(title: "promotional", discount_deadline: Time.now+1.years)
+Promotional.create(discount_deadline: Time.now+1.years)
 
 
 price = [100, 200, 300]
