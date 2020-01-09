@@ -1,14 +1,14 @@
 <%= render partial: 'admin/shared/navtab' %>
-<h1>商品列表</h1>
-    <ul class="nav nav-pills nav-pills-center">
-      <li><%= link_to '新增商品', new_admin_product_path, class: "btn btn-default btn-primary" %></li>
-      <li role="presentation" class="active"><%=link_to '全部商品', admin_products_path %></li>
-        <% @vendors.each do |vendor| %>
-      <li role="presentation">
-        <%= link_to vendor.name, admin_vendor_path(vendor) %>
-      </li>
-        <% end %>
-    </ul>
+  <h1>商品列表 <%= link_to '新增商品', new_admin_product_path, class: "btn btn-default btn-light" %> </h1>
+
+  <ul class="nav nav-pills nav-pills-center">
+    <li role="presentation" class="active"><%=link_to '全部商品', admin_products_path %></li>
+      <% @vendors.each do |vendor| %>
+    <li role="presentation">
+      <%= link_to vendor.name, admin_vendor_path(vendor) %>
+    </li>
+      <% end %>
+  </ul>
 
 
 <table class="table table-hover">
