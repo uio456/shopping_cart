@@ -14,7 +14,7 @@
       <td>商品名稱</td>
       <td>售價</td>
       <td>供應商</td>
-      <td>Product.state</td> 
+      <td>商品狀態</td>
     </tr>
   </thead>
   <tbody>
@@ -29,7 +29,7 @@
         <%= product.vendor.name %>
       </td>
       <td>
-        <%= product.state %>
+        <%= I18n.t("promotion.#{product.state}") %>
       </td>
     </tr>
     <% end %>

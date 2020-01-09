@@ -18,7 +18,7 @@
     <% current_cart.items.each do |item| %>
       <tr>
         <td><%= item.product.title %></td>
-        <td><%= item.product.state %></td>
+        <td><%= I18n.t("promotion.#{item.product.state}") %></td>
         <td><%= item.quantity %></td>
         <td><%= item.product.price %></td>
         <td><%= item.price %></td>

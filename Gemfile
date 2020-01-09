@@ -33,6 +33,7 @@ gem 'jquery-rails'
 gem 'devise', '~> 4.5'
 gem 'ffaker', '~> 2.10'
 gem 'rb-readline'
+gem 'rails-i18n'
 
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'

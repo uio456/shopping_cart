@@ -42,5 +42,7 @@ end
 
 # 按下結帳時可以抽獎，後台給一個 rand(10) 如果是 7 就在打五折
 # Create Staff Table
-# 把 item_p、vendor_p、normal 寫成text helper 或 i18n
+# 加入i18n 
 # 寫測試
+# 首頁顯示已拿到折扣多少
+# AJAX 輔助按鈕獨立送出
