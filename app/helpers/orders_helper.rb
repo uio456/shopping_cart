@@ -9,4 +9,20 @@ module OrdersHelper
     end
      "顯示目前享有折扣金額：#{content}"
   end
+
+  def product_state(product)
+    state = I18n.t("promotion.#{product.state}")
+    promotion = Promotional.first
+    promotion.vendor_discount
+
+    case product.state
+
+    when "item_p"
+      state + "，買#{promotion.item_p}件#{Promotional::DISCOUNT.key(promotion.item_discount)}"
+    when "vendor_p"
+      state + "，買#{promotion.vendor_p}件#{Promotional::DISCOUNT.key(promotion.vendor_discount)}"
+    else
+      state
+    end
+  end
 end

@@ -31,7 +31,7 @@
         <%= product.vendor.name %>
       </td>
       <td>
-        <%= I18n.t("promotion.#{product.state}") %>
+        <%= product_state(product) %>
       </td>
     </tr>
     <% end %>
