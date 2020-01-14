@@ -6,9 +6,7 @@ class CartsController < ApplicationController
     if current_cart.total_price >= 800
       # 800 的金額應該寫進 Promotional 裡
       # 後台沒做滿額送產品的介面
-      # unless current_cart.free_product.persent?
         Discount.free_product(current_cart)
-      # end
     end
     session[Cart::SessionKey] = current_cart.serialize
     # 最後存進 session 裡
