@@ -4,7 +4,7 @@ class Product < ApplicationRecord
   validate :check_product_price
 
   scope :avalible_products, -> { where(state: ["vendor_p", "normal", "item_p"])}
-  enum state: {vendor_p: "vendor_p", normal: "normal", item_p: "item_p"}
+  enum state: {vendor_p: "vendor_p", normal: "normal", item_p: "item_p", for_free: "for_free"}
 
 private
 
