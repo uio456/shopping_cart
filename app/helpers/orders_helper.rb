@@ -18,9 +18,9 @@ module OrdersHelper
     case product.state
 
     when "item_p"
-      state + "，買#{promotion.item_p}件#{Promotional::DISCOUNT.key(promotion.item_discount)}"
+      state + "，滿#{promotion.item_p}件#{Promotional::DISCOUNT.key(promotion.item_discount)}"
     when "vendor_p"
-      state + "，買#{promotion.vendor_p}件#{Promotional::DISCOUNT.key(promotion.vendor_discount)}"
+      state + "，滿#{promotion.vendor_p}件#{Promotional::DISCOUNT.key(promotion.vendor_discount)}"
     else
       state
     end
