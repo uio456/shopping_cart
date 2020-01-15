@@ -8,9 +8,10 @@
   <thead>
     <tr>
       <th>商品名稱</th>
-      <th>Produc.state</th>
+      <th>商品狀態</th>
       <th>數量</th>
       <th>單價</th>
+      <th>折扣金額</th>
       <th>小計</th>
     </tr>
   </thead>
@@ -18,24 +19,23 @@
     <% current_cart.items.each do |item| %>
       <tr>
         <td><%= item.product.title %></td>
-        <td><%= I18n.t("promotion.#{item.product.state}") %></td>
+        <td><%= product_state(item.product) %></td>
         <td><%= item.quantity %></td>
         <td><%= item.product.price %></td>
+        <td><%= item.quantity %></td> <!-- 寫 helper 算出折扣金額 -->
         <td><%= item.price %></td>
       </tr>
     <% end %>
   </tbody>
   <tfood>
+
     <tr>
-      <td colspan="4">Cart_item 目前折扣：<%= current_cart.cart_item_discount_price %></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td colspan="4">運費</td>
+      <td colspan="5">運費</td>
       <td><%= current_cart.shipping_fee %></td>
+      <!-- 如超過免運費金額，顯示已免運費 -->
     </tr>
   <tr>
-    <td colspan="4">總計</td>
+    <td colspan="5">總計</td>
     <td><%= current_cart.total_price %></td>
   </tr>
   </tfood>
