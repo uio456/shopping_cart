@@ -1,13 +1,6 @@
 module Discount
   class << self
 
-    # CART_ITEM_DISCOUNT = 0.8
-    # CART_DISCOUNT = 0.8
-    # ORDER_DISCOUNT = 1000
-    # MAXIMUM_DISCOUNT = 500
-    # DISCOUNT_DEADLINE = Time.new(2019,4,1)
-    # 暫定優惠只到 2019/2/28 23:59:59
-
     def check_discount_deadline
       promotional = Promotional.first
       promotional.discount_deadline > Time.now
@@ -94,8 +87,3 @@ module Discount
 
   end
 end
-
-# def price_with_discount
-#   return self.price if self.discount.nil? || self.discount.zero?
-#   self.price - (self.price / self.discount)
-# end

@@ -2,9 +2,7 @@ class OrdersController < ApplicationController
   before_action :require_login
 
   def index
-    # @orders = current_user.orders.order(created_at: :desc)
     @orders = current_user.orders
-    # @orders = current_user.orders
   end
 
   def create
