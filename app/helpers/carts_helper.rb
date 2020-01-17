@@ -12,6 +12,7 @@ module CartsHelper
     when "item_p"
       if item_quantity >= promotion.item_p
         return Discount.cart_item_discount_price(item.product, item_quantity)
+        # 算 cart_item_discount_price 可考慮抽成另一個 module
       end
     when "vendor_p"
       if item_quantity >= promotion.vendor_p
