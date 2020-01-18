@@ -22,14 +22,11 @@ class GetWeather
 
     def day_time_info(data)
       day_time_info = data.css('tbody tr')[0]
-      @info[:day_time_info] = {time_info: day_time_info.css('th')[0].text,
-                               temperature: day_time_info.css('td')[0].text,
-                               desc: day_time_info.css('td')[2].text,
-                               probability_of_recipitation: day_time_info.css('td')[3].text}
-      # puts day_time_info.css('th')[0].text # 什麼時段的資訊
-      # puts day_time_info.css('td')[0].text # 溫度
-      # puts day_time_info.css('td')[2].text # 舒適度描述
-      # puts day_time_info.css('td')[3].text # 降雨機率
+      @info[:day_time_info] = {time_info: day_time_info.css('th')[0].text, # 什麼時段的資訊
+                               temperature: day_time_info.css('td')[0].text, # 溫度
+                               desc: day_time_info.css('td')[2].text, # 舒適度描述
+                               probability_of_recipitation: day_time_info.css('td')[3].text # 降雨機率
+                              }
     end
 
     def night_time_info(data)
@@ -37,11 +34,9 @@ class GetWeather
       @info[:night_time_info] = {time_info: night_time_info.css('th')[0].text,
                                  temperature: night_time_info.css('td')[0].text,
                                  desc: night_time_info.css('td')[2].text,
-                                 probability_of_recipitation: night_time_info.css('td')[3].text}
-      # puts night_time_info.css('th')[0].text # 什麼時段的資訊
-      # puts night_time_info.css('td')[0].text # 溫度
-      # puts night_time_info.css('td')[2].text # 舒適度描述
-      # puts night_time_info.css('td')[3].text # 降雨機率
+                                 probability_of_recipitation: night_time_info.css('td')[3].text
+                                }
+
     end
 
     def tomorrow_info(data)
@@ -49,11 +44,8 @@ class GetWeather
       @info[:tomorrow_info] = {time_info: tomorrow_info.css('th')[0].text,
                                temperature: tomorrow_info.css('td')[0].text,
                                desc: tomorrow_info.css('td')[2].text,
-                               probability_of_recipitation: tomorrow_info.css('td')[3].text}
-      # puts tomorrow_info.css('th')[0].text # 什麼時段的資訊
-      # puts tomorrow_info.css('td')[0].text # 溫度
-      # puts tomorrow_info.css('td')[2].text # 舒適度描述
-      # puts tomorrow_info.css('td')[3].text # 降雨機率
+                               probability_of_recipitation: tomorrow_info.css('td')[3].text
+                              }
     end
   end
 
