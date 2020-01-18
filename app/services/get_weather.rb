@@ -22,8 +22,9 @@ class GetWeather
 
     def day_time_info(data)
       day_time_info = data.css('tbody tr')[0]
-      @info[:day_time_info] = {des: day_time_info.css('th')[0].text,
+      @info[:day_time_info] = {time_info: day_time_info.css('th')[0].text,
                                temperature: day_time_info.css('td')[0].text,
+                               desc: day_time_info.css('td')[2].text,
                                probability_of_recipitation: day_time_info.css('td')[3].text}
       # puts day_time_info.css('th')[0].text # 什麼時段的資訊
       # puts day_time_info.css('td')[0].text # 溫度
@@ -33,9 +34,10 @@ class GetWeather
 
     def night_time_info(data)
       night_time_info = data.css('tbody tr')[1]
-      @info[:night_time_info] = {des: night_time_info.css('th')[0].text,
-                               temperature: night_time_info.css('td')[0].text,
-                               probability_of_recipitation: night_time_info.css('td')[3].text}
+      @info[:night_time_info] = {time_info: night_time_info.css('th')[0].text,
+                                 temperature: night_time_info.css('td')[0].text,
+                                 desc: night_time_info.css('td')[2].text,
+                                 probability_of_recipitation: night_time_info.css('td')[3].text}
       # puts night_time_info.css('th')[0].text # 什麼時段的資訊
       # puts night_time_info.css('td')[0].text # 溫度
       # puts night_time_info.css('td')[2].text # 舒適度描述
@@ -44,8 +46,9 @@ class GetWeather
 
     def tomorrow_info(data)
       tomorrow_info = data.css('tbody tr')[2]
-      @info[:tomorrow_info] = {des: tomorrow_info.css('th')[0].text,
+      @info[:tomorrow_info] = {time_info: tomorrow_info.css('th')[0].text,
                                temperature: tomorrow_info.css('td')[0].text,
+                               desc: tomorrow_info.css('td')[2].text,
                                probability_of_recipitation: tomorrow_info.css('td')[3].text}
       # puts tomorrow_info.css('th')[0].text # 什麼時段的資訊
       # puts tomorrow_info.css('td')[0].text # 溫度
