@@ -5,8 +5,7 @@ class Admin::UsersController < Admin::BaseController
     @users = User.all
   end
 
-  def method_name
-    
+  def edit
   end
 
   def update
@@ -16,8 +15,8 @@ class Admin::UsersController < Admin::BaseController
       redirect_to admin_users_path
       # render :file => "public/401.html", :status => :unauthorized
     else
-      @user.update(role: params[:role])
-      flash[:notice] = "#{@user.name} 權限更新為 #{params[:role]}"
+      @user.update(user_params)
+      flash[:notice] = "成功更新使用者資料"
       redirect_to admin_users_path
     end
   end
@@ -30,7 +29,7 @@ class Admin::UsersController < Admin::BaseController
   end
 
   def user_params
-    params.require(:user).permit(:role)
+    params.require(:user).permit(:role, :name, :email)
   end
 
 end
