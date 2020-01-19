@@ -9,11 +9,21 @@ class Product < ApplicationRecord
   scope :avalible_products, -> { where(state: ["vendor_p", "normal", "item_p"])}
   enum state: {vendor_p: "vendor_p", normal: "normal", item_p: "item_p", for_free: "for_free"}
 
-private
 
   def check_product_price
     if price <= 0
       errors.add(:price, "can't not less then 0")
+    end
+  end
+
+  def tag_list
+    tags.map(&:name).join(', ')
+    # 相等於 tags.map { |tag| tag.name }.join(' ')
+  end
+
+  def tag_list=(names)
+    self.tags = names.split(',').map do |item|
+      Tag.where(name: item.strip).first_or_create!
     end
   end
 

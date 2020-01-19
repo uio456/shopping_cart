@@ -3,7 +3,7 @@ class Admin::ProductsController < Admin::BaseController
 
   def index
     @vendors = Vendor.all
-    @products = Product.all
+    @products = Product.all.includes(:taggings)
     @product = Product.new
   end
 
@@ -46,7 +46,7 @@ class Admin::ProductsController < Admin::BaseController
   end
 
   def product_params
-    params.require(:product).permit(:title, :description, :price, :vendor_id, :state)
+    params.require(:product).permit(:title, :description, :price, :vendor_id, :state, :tag_list)
   end
 
   
