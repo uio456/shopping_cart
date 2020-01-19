@@ -6,6 +6,7 @@ class GetWeather
     def perform
       @info = Hash.new
       books = Nokogiri::HTML(open('https://www.cwb.gov.tw/V7/forecast/taiwan/Taipei_City.htm'))
+      # 舊網站支援到 2020/1/31 ？ 新網站地址 https://www.cwb.gov.tw/V8/C/W/County/County.html?CID=63
       data = books.css('.FcstBoxTable01').first
       city = data.css('thead th').first.content
       @info[:city] = city
