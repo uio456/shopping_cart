@@ -1,0 +1,15 @@
+defaults: &defaults
+  smtp_settings:
+    enable_starttls_auto: true
+    address: "smtp.mailgun.org"
+    port: 587
+    domain: "bobocart.herokuapp.com"
+    authentication: :login
+    user_name: "要填寫"
+    password: "要填寫"
+development:
+  <<: *defaults
+test:
+  <<: *defaults
+production:
+  <<: *defaults
