@@ -1,4 +1,5 @@
-<%= link_to '回後台首頁', admin_root_path %>
-<h1>編輯商品</h1>
+
+<h3><%= "編輯商品: #{@product.title}"%></h3>
+<span class="pull-right"><%= link_to '回後台首頁', admin_root_path %></span>
 
 <%= render "form", product: @product %>

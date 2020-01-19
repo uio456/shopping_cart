@@ -3,16 +3,23 @@
     <div class="col-12 col-md-12">
       <%= form_for  [:admin, @product] do |f| %>
         <div class="form-group">
+          <label><h4>目前促銷狀態 --> </h4></label>
+          <%= f.radio_button :state, 'normal', class: "form-check-input" %>
+          <%= label :state, 'normal', class: "form-check-label" %>
+          <%= f.radio_button :state, 'item_p', class: "form-check-input" %>
+          <%= label :state, 'item_p', class: "form-check-label" %>
+          <%= f.radio_button :state, 'vendor_p', class: "form-check-input" %>
+          <%= label :state, 'vendor_p', class: "form-check-label" %>
+          <%= f.radio_button :state, 'for_free', class: "form-check-input" %>
+          <%= label :state, 'for_free', class: "form-check-label" %>
+        </div>
+        <div class="form-group">
           <%= f.label :vendor, "供應商" %>
           <%= f.collection_select :vendor_id, Vendor.all, :id, :name, {prompt: "Select Vendor"}, {class: "form-control"} %>
         </div>
         <div class="form-group">
           <%= f.label :title, "商品名稱" %>
           <%= f.text_field :title, placeholder: "Product Name", class: "form-control"%>
-        </div>
-        <div class="form-group">
-          <%= f.label :description, "描述" %>
-          <%= f.text_field :description, placeholder: "Add Product Description", class: "form-control"%>
         </div>
         <div class="form-group">
           <%= f.label :price, "價錢" %>
@@ -23,15 +30,8 @@
           <%= f.text_field :tag_list, placeholder: "Tags", class: "form-control"%>
         </div>
         <div class="form-group">
-          <label><h4>促銷狀態 -- ></h4></label>
-          <%= f.radio_button :state, 'normal', class: "form-check-input" %>
-          <%= label :state, 'normal', class: "form-check-label" %>
-          <%= f.radio_button :state, 'item_p', class: "form-check-input" %>
-          <%= label :state, 'item_p', class: "form-check-label" %>
-          <%= f.radio_button :state, 'vendor_p', class: "form-check-input" %>
-          <%= label :state, 'vendor_p', class: "form-check-label" %>
-          <%= f.radio_button :state, 'for_free', class: "form-check-input" %>
-          <%= label :state, 'for_free', class: "form-check-label" %>
+          <%= f.label :description, "描述" %>
+          <%= f.text_area :description, placeholder: "Add Product Description", class: "form-control"%>
         </div>
         <div class="form-group">
           <%= f.submit "Submit", class: "btn btn-primary" %>
