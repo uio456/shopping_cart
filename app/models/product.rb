@@ -1,5 +1,8 @@
 class Product < ApplicationRecord
   belongs_to :vendor
+  has_many :taggings
+  has_many :tags, through: :taggings
+
   validates_presence_of :vendor, :title, :price, :state
   validate :check_product_price
 
