@@ -16,6 +16,7 @@
     <tr>
       <th>商品名稱</th>
       <th>售價</th>
+      <th>標籤</th>
       <th>編輯</th>
       <th>狀態</th>
     </tr>
@@ -27,6 +28,7 @@
         <%= product.title %>
       </td>
       <td><%= product.price %></td>
+      <td><%= product.tag_list %></td>
       <td>
         <%= link_to '編輯', edit_admin_product_path(product), class: "btn btn-xs btn-default" %>
         <%= link_to '刪除', admin_product_path(product), method: "delete", data: { confirm: "確定刪除?" }, class: "btn btn-xs btn-default" %>
