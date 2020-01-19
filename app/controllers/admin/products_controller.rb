@@ -3,7 +3,7 @@ class Admin::ProductsController < Admin::BaseController
 
   def index
     @vendors = Vendor.all
-    @products = Product.all.includes(:taggings)
+    @products = Product.all.includes(:tags)
     @product = Product.new
   end
 
