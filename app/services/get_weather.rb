@@ -5,22 +5,35 @@ class GetWeather
   class << self
     def perform(city: "Taipei_City")
       @info = Hash.new
-      url = "https://www.cwb.gov.tw/V7/forecast/taiwan/#{city}.htm"
+      @city = city
+
+      get_info
+      @info
+    end
+
+    def get_info
+      if I18n.t('get_weather.en').values.include?(@city)
+        data = connect_url
+
+        day_time_info(data)
+        night_time_info(data)
+        tomorrow_info(data)
+      else
+        @info
+      end
+    end
+
+    def connect_url
+      url = "https://www.cwb.gov.tw/V7/forecast/taiwan/#{@city}.htm"
       books = Nokogiri::HTML(open(url))
       # 舊網站支援到 2020/1/31 ？ 新網站地址 https://www.cwb.gov.tw/V8/C/W/County/County.html?CID=63
       data = books.css('.FcstBoxTable01').first
+      # 這邊都要確認，如果資料是 nill 就直接回傳沒有資料
       city = data.css('thead th').first.content
       @info[:url] = url
       @info[:city] = city
 
-      get_info(data)
-      @info
-    end
-
-    def get_info(data)
-      day_time_info(data)
-      night_time_info(data)
-      tomorrow_info(data)
+      data
     end
 
     def day_time_info(data)
@@ -50,6 +63,7 @@ class GetWeather
                                probability_of_recipitation: tomorrow_info.css('td')[3].text
                               }
     end
+
   end
 
 end
