@@ -1,0 +1,3 @@
+<% I18n.t('get_weather.en').each do |k, v| %>
+  <%= link_to I18n.t("get_weather.tw.#{k}"), products_path(:city => v), class: "btn btn-default btn-info" %>
+<% end %>

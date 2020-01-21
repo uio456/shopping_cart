@@ -3,3 +3,14 @@ zh-TW:
     normal: "賣太好，不打折"
     item_p: "商品特價"
     vendor_p: "廠商特價"
+  get_weather:
+    en:
+      taipei_city: "Taipei_City"
+      new_naipei_city: "New_Taipei_City"
+      taichung_city: "Taichung_City"
+      kaohsiung_city: "Kaohsiung_City"
+    tw:
+      taipei_city: "台北市"
+      new_naipei_city: "新北市"
+      taichung_city: "台中市"
+      kaohsiung_city: "高雄市"
