@@ -1,8 +1,20 @@
-<h1>商品列表</h1>
-<span class='pull-right'><%= cart_item_discount_price %></span>
-<!-- 寫個 helper 如果折扣是 0，寫些其他字，可輪流播放些好笑的字，etc:快點買、不要只會看、要考慮的是買幾件不是買不買  -->
+<div class="container">
+  <div class="row">
+    <div class="col-md-10 col-md-offset-1">
+      <%= link_to '台北市天氣列表', products_path(:city => "Taipei_City"), class: "btn btn-default btn-info" %>
+      <%= link_to '新北市天氣列表', products_path(:city => "New_Taipei_City"), class: "btn btn-default btn-info" %>
+      <%= link_to '台中市天氣列表', products_path(:city => "Taichung_City"), class: "btn btn-default btn-info" %>
+      <%= link_to '高雄市天氣列表', products_path(:city => "Kaohsiung_City"), class: "btn btn-default btn-info" %>
+      <br>
+    </div>
+  </div>
+</div>
+       <%=@weather_info %>
 
-<%#= link_to '新增商品', new_product_path, class: "btn btn-default btn-primary" %>
+
+
+<span class='pull-right'><%= cart_item_discount_price %></span>
+
  <h3>
   <%= link_to cart_path do %>
     <%= current_cart.count_items %>
