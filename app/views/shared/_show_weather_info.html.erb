@@ -1,0 +1,11 @@
+<% if weather_info.present? %>
+  <br>
+  <br>
+  資料來源：<%= link_to weather_info[:url], weather_info[:url], target: "_blank" %>
+  <br>
+  氣溫：<%= weather_info[:today_info][:temperature] %>
+  <br>
+  天氣描述：<%= weather_info[:today_info][:desc] %>
+  <br>
+  下雨機率：<%= weather_info[:today_info][:probability_of_recipitation] %>
+<% end %>

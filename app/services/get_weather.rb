@@ -15,8 +15,8 @@ class GetWeather
       if I18n.t('get_weather.en').values.include?(@city)
         data = connect_url
 
-        day_time_info(data)
-        night_time_info(data)
+        today_info(data)
+        tonight_info(data)
         tomorrow_info(data)
       else
         @info
@@ -36,18 +36,18 @@ class GetWeather
       data
     end
 
-    def day_time_info(data)
+    def today_info(data)
       day_time_info = data.css('tbody tr')[0]
-      @info[:day_time_info] = {time_info: day_time_info.css('th')[0].text, # 什麼時段的資訊
+      @info[:today_info] = {time_info: day_time_info.css('th')[0].text, # 什麼時段的資訊
                                temperature: day_time_info.css('td')[0].text, # 溫度
                                desc: day_time_info.css('td')[2].text, # 舒適度描述
                                probability_of_recipitation: day_time_info.css('td')[3].text # 降雨機率
                               }
     end
 
-    def night_time_info(data)
+    def tonight_info(data)
       night_time_info = data.css('tbody tr')[1]
-      @info[:night_time_info] = {time_info: night_time_info.css('th')[0].text,
+      @info[:tonight_info] = {time_info: night_time_info.css('th')[0].text,
                                  temperature: night_time_info.css('td')[0].text,
                                  desc: night_time_info.css('td')[2].text,
                                  probability_of_recipitation: night_time_info.css('td')[3].text

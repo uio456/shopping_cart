@@ -1,13 +1,11 @@
 <div class="container">
   <div class="row">
-    <div class="col-md-10 col-md-offset-1">
-      <%= render partial: 'shared/get_weather' %>
-      <br>
+    <div class="col-md-8 col-md-offset-2">
+      根據地區天氣推薦商品：<%= render partial: 'shared/get_weather' %>
+      <span>
+        <%= render partial: 'shared/show_weather_info', :locals => {:weather_info => @weather_info} %>
+      </span>
     </div>
-    <span>
-      <%= @weather_info %>
-      <!-- 做的 helper 顯示該顯示的資訊，下雨機率、啦曲時間、更新時間、描述 -->
-    </span>
     <span class='pull-right'><%= cart_item_discount_price %></span>
 
      <h3>
@@ -31,7 +29,7 @@
         <% @products.each do |product| %>
         <tr>
           <td>
-            <%= link_to '放到購物車', add_cart_path(product), method: "post", class: "btn btn-xs btn-danger" %>
+            <%= link_to '放到購物車', add_cart_path(product), method: "post", class: "btn btn-xs btn-success" %>
             <%= product.title %>
           </td>
           <td><%= product.price %></td>
