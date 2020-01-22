@@ -30,6 +30,7 @@ class GetWeather
       data = books.css('.FcstBoxTable01').first
       # 這邊都要確認，如果資料是 nill 就直接回傳沒有資料
       city = data.css('thead th').first.content
+      @info[:query_time] = Time.current.strftime('%Y-%m-%d %H:%M:%S')
       @info[:url] = url
       @info[:city] = city
 

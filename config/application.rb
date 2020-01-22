@@ -11,6 +11,8 @@ module Todo5
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 5.2
 
+    config.time_zone = 'Taipei'
+
     config.i18n.default_locale = "zh-TW"
 
     # config.app = config_for(:app)
