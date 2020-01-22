@@ -1,19 +1,21 @@
 <div class="container">
   <div class="row">
     <div class="col-md-8 col-md-offset-2">
-      根據「即時」地區天氣推薦商品：<%= render partial: 'shared/get_weather' %>
+      <h4>根據「即時天氣」推薦商品：<%= render partial: 'shared/get_weather' %></h4>
       <span>
         <%= render partial: 'shared/show_weather_info', :locals => {:weather_info => @weather_info} %>
       </span>
     </div>
-    <span class='pull-right'><%= cart_item_discount_price %></span>
 
-     <h3>
-      <%= link_to cart_path do %>
-        <%= current_cart.count_items %>
-        <i "<span class= 'glyphicon glyphicon-shopping-cart'>Cart</span></i>
-      <% end %>
-    </h3>
+    <div class="col-md-12">
+      <span class='pull-right'><%= cart_item_discount_price %></span>
+      <h3>
+        <%= link_to cart_path do %>
+          <%= current_cart.count_items %>
+          <i "<span class= 'glyphicon glyphicon-shopping-cart'>Cart</span></i>
+        <% end %>
+      </h3>
+    </div>
 
     <table class="table table-hover">
       <thead>
