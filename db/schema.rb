@@ -65,6 +65,7 @@ ActiveRecord::Schema.define(version: 2020_01_19_034135) do
   end
 
   create_table "promotionals", force: :cascade do |t|
+    t.string "title", null: false
     t.integer "item_p", default: 3
     t.decimal "item_discount", default: "1.0"
     t.integer "vendor_p", default: 3
@@ -76,7 +77,6 @@ ActiveRecord::Schema.define(version: 2020_01_19_034135) do
     t.decimal "shipping_fee", default: "150.0"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "title"
   end
 
   create_table "taggings", force: :cascade do |t|
