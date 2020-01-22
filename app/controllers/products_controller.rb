@@ -1,8 +1,8 @@
 class ProductsController < ApplicationController
-  include GetWeatherConcern
+  include GetWeatherConcern # 可把這個移到 service 裡
 
   def index
     get_weather
-    @products = Product.avalible_products.includes(:vendor)
+    @products = FilterProducts.perform(@weather_info)
   end
 end

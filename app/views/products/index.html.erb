@@ -4,8 +4,10 @@
       <%= render partial: 'shared/get_weather' %>
       <br>
     </div>
-
-    <%= @weather_info %>
+    <span>
+      <%= @weather_info %>
+      <!-- 做的 helper 顯示該顯示的資訊，下雨機率、啦曲時間、更新時間、描述 -->
+    </span>
     <span class='pull-right'><%= cart_item_discount_price %></span>
 
      <h3>
@@ -20,6 +22,7 @@
         <tr>
           <td>商品名稱</td>
           <td>售價</td>
+          <th>標籤</th>
           <td>供應商</td>
           <td>商品狀態</td>
         </tr>
@@ -32,6 +35,7 @@
             <%= product.title %>
           </td>
           <td><%= product.price %></td>
+          <td><%= product.tag_list %></td>
           <td>
             <%= product.vendor.name %>
           </td>
