@@ -1,4 +1,4 @@
-module GetWeatherProducts
+class GetWeatherProducts
   class << self
 
     def perform(products, weather_info)

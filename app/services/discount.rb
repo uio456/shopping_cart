@@ -1,4 +1,4 @@
-module Discount
+class Discount
   class << self
 
     def check_discount_deadline
