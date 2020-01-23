@@ -10,7 +10,7 @@ class CartsController < ApplicationController
     session[Cart::SessionKey] = current_cart.serialize
     # 最後存進 session 裡
 
-    redirect_to products_path, notice: "已加入購物車"
+    redirect_back(fallback_location: products_path)
   end
 
   def show
