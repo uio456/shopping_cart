@@ -1,0 +1,28 @@
+<%= render partial: 'admin/shared/navtab' %>
+<% if current_user.admin? %>
+  <%= link_to '新增管理員', new_admin_user_path, class: "btn btn btn-default" %>
+<% end %>
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>姓名</th>
+      <th>電子郵件</th>
+      <th>權限</th>
+      <th>編輯</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @users.each do |user| %>
+    <tr>
+      <td>
+        <%= user.name %>
+      </td>
+      <td><%= user.email %></td>
+      <td><%= user.role %></td>
+      <td>
+        <%= link_to '編輯', edit_admin_user_path(user), class: "btn btn-xs btn-default" %>
+      </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>

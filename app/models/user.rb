@@ -5,6 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   scope :all_customers, -> {where(role: "normal")}
+  scope :all_admin, -> {where.not(role: "normal")}
 
   has_many :orders
 
@@ -12,6 +13,10 @@ class User < ApplicationRecord
 
   def admin?
     role != "normal"
+  end
+
+  def superman?
+    role == "superman"
   end
 
 end

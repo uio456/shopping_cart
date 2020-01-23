@@ -23,16 +23,22 @@ class Admin::UsersController < Admin::BaseController
   end
 
   def update
-    @user = User.find(params[:id])
     if @user.email == "root@example.com"
       flash[:alert] = "不要亂動~"
-      redirect_to admin_users_path
+      redirect_back(fallback_location: admin_admin_users_path)
       # render :file => "public/401.html", :status => :unauthorized
     else
       @user.update(user_params)
-      flash[:notice] = "成功更新使用者資料"
-      redirect_to admin_users_path
+      if @user.role == "admin" || @user.role == "superman"
+        redirect_to admin_admin_users_path, notice: "更新管理員完成"
+      else
+        redirect_to admin_users_path, notice: "更新使用者完成"
+      end
     end
+  end
+
+  def admin
+    @users = User.all_admin
   end
 
   private
