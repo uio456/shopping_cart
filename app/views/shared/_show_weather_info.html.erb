@@ -3,6 +3,8 @@
   <br>
   資料來源：<%= link_to weather_info[:url], weather_info[:url], target: "_blank" %>
   <br>
+  資料來源：<%= weather_info[:city] %>
+  <br>
   拉取時間：<%= weather_info[:query_time] %>
   <br>
   氣溫：<%= weather_info[:today_info][:temperature] %>
