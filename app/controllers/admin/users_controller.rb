@@ -2,7 +2,7 @@ class Admin::UsersController < Admin::BaseController
   before_action :find_user, only: [:edit, :update]
 
   def index
-    @users = User.all
+    @users = User.all_customers
   end
 
   def new

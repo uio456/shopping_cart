@@ -4,6 +4,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  scope :all_customers, -> {where(role: "normal")}
+
   has_many :orders
 
   ROLE = ["normal", "admin", "superman"]
