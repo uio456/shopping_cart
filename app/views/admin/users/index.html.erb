@@ -1,7 +1,4 @@
 <%= render partial: 'admin/shared/navtab' %>
-<% if current_user.admin? %>
-  <%= link_to '新增管理員', new_admin_user_path, class: "btn btn btn-default" %>
-<% end %>
 <table class="table table-hover">
   <thead>
     <tr>

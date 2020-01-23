@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
     <div class="col-md-6 col-md-offset-3">
-      <%= form_for  [:admin, @product] do |f| %>
+      <%= form_for  [:admin, product] do |f| %>
         <div class="form-group">
           <label><h4>目前促銷狀態 --> </h4></label>
           <%= f.radio_button :state, 'normal', class: "form-check-input" %>
