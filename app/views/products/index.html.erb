@@ -34,7 +34,6 @@
             <%= link_to '放到購物車', add_cart_path(product), method: "post", class: "btn btn-xs btn-success" %>
             <%= product.title %>
             <%= render partial: "shared/favorite", locals: {product: product} %>
-
           </td>
           <td><%= product.price %></td>
           <td><%= product.tag_list %></td>
