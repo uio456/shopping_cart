@@ -3,6 +3,10 @@ class Product < ApplicationRecord
   has_many :taggings
   has_many :tags, through: :taggings
 
+  has_many :favorites, dependent: :destroy
+  has_many :favorited_users, through: :favorites, source: :user
+
+
   validates_presence_of :vendor, :title, :price, :state
   validate :check_product_price
 
@@ -26,6 +30,10 @@ class Product < ApplicationRecord
     self.tags = names.split(',').map do |item|
       Tag.where(name: item.strip).first_or_create!
     end
+  end
+
+  def is_favorited?(user)
+    self.favorited_users.include?(user)
   end
 
 end

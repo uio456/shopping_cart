@@ -9,6 +9,9 @@ class User < ApplicationRecord
 
   has_many :orders
 
+  has_many :favorites, dependent: :destroy
+  has_many :favorited_products, through: :favorites, source: :product
+
   ROLE = ["normal", "admin", "superman"]
 
   def admin?
