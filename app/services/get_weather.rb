@@ -3,9 +3,10 @@ require 'open-uri'
 class GetWeather
 
   class << self
-    def perform(city: "Taipei_City")
+    def perform(city: "Taipei_City", which_day: "today")
       @info = Hash.new
       @city = city
+      @which_day = which_day
 
       get_info
       @info
@@ -15,11 +16,14 @@ class GetWeather
       if I18n.t('get_weather.en').values.include?(@city)
         data = connect_url
 
-        today_info(data)
-        tonight_info(data)
-        tomorrow_info(data)
+        case @which_day
+        when "today"
+          today_info(data)
+        when "tomorrow"
+          tomorrow_info(data)
+        end
       else
-        @info
+        @info[:error] = "查詢資料有誤，請再按一次"
       end
     end
 
@@ -33,13 +37,14 @@ class GetWeather
       @info[:query_time] = Time.current.strftime('%Y-%m-%d %H:%M:%S')
       @info[:url] = url
       @info[:city] = city
+      @info[:which_day] = @which_day
 
       data
     end
 
     def today_info(data)
       day_time_info = data.css('tbody tr')[0]
-      @info[:today_info] = {time_info: day_time_info.css('th')[0].text, # 什麼時段的資訊
+      @info[:weather_info] = {time_info: day_time_info.css('th')[0].text, # 什麼時段的資訊
                                temperature: day_time_info.css('td')[0].text, # 溫度
                                desc: day_time_info.css('td')[2].text, # 舒適度描述
                                probability_of_recipitation: day_time_info.css('td')[3].text # 降雨機率
@@ -48,7 +53,7 @@ class GetWeather
 
     def tonight_info(data)
       night_time_info = data.css('tbody tr')[1]
-      @info[:tonight_info] = {time_info: night_time_info.css('th')[0].text,
+      @info[:weather_info] = {time_info: night_time_info.css('th')[0].text,
                                  temperature: night_time_info.css('td')[0].text,
                                  desc: night_time_info.css('td')[2].text,
                                  probability_of_recipitation: night_time_info.css('td')[3].text
@@ -58,7 +63,7 @@ class GetWeather
 
     def tomorrow_info(data)
       tomorrow_info = data.css('tbody tr')[2]
-      @info[:tomorrow_info] = {time_info: tomorrow_info.css('th')[0].text,
+      @info[:weather_info] = {time_info: tomorrow_info.css('th')[0].text,
                                temperature: tomorrow_info.css('td')[0].text,
                                desc: tomorrow_info.css('td')[2].text,
                                probability_of_recipitation: tomorrow_info.css('td')[3].text

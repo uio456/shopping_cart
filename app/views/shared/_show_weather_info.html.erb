@@ -3,13 +3,15 @@
   <br>
   資料來源：<%= link_to weather_info[:url], weather_info[:url], target: "_blank" %>
   <br>
-  資料來源：<%= weather_info[:city] %>
+  縣市：<%= weather_info[:city] %>
+  <br>
+  日期：<%= weather_info[:which_day] %>
+  <br>
+  氣溫：<%= weather_info[:weather_info][:temperature] %>
+  <br>
+  天氣描述：<%= weather_info[:weather_info][:desc] %>
+  <br>
+  下雨機率：<%= weather_info[:weather_info][:probability_of_recipitation] %>
   <br>
   拉取時間：<%= weather_info[:query_time] %>
-  <br>
-  氣溫：<%= weather_info[:today_info][:temperature] %>
-  <br>
-  天氣描述：<%= weather_info[:today_info][:desc] %>
-  <br>
-  下雨機率：<%= weather_info[:today_info][:probability_of_recipitation] %>
 <% end %>

@@ -17,7 +17,8 @@ class GetWeatherProducts
       # Breeze = Tag.find(12)
       # Hot = Tag.find(13)
       # rain = Tag.find(14)
-      case @weather_info[:today_info][:desc]
+
+      case @weather_info[:weather_info][:desc]
       when '稍有寒意至舒適', '寒冷至舒適'
         tag_names =  ["保暖", "輕便"]
       when '舒適'
