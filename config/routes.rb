@@ -13,12 +13,17 @@ Rails.application.routes.draw do
       post :unfavorite
     end
   end
-  resources :orders
+  resources :users, only:[:show] do
+    collection do
+      get :my_favorites
+    end
+  end
   resource :cart, only:[:show, :destroy] do
     collection do
       post :add, path:'add/:id'
     end
   end
+  resources :orders
 
   # admin panel
   namespace :admin, path: :make_backend_url_abstruse do
