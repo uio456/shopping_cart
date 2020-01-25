@@ -21,6 +21,9 @@
       <thead>
         <tr>
           <td>商品名稱</td>
+          <% if current_user.present? %>
+            <td>收藏</td>
+          <% end %>
           <td>售價</td>
           <th>標籤</th>
           <td>供應商</td>
@@ -33,8 +36,10 @@
           <td>
             <%= link_to '放到購物車', add_cart_path(product), method: "post", class: "btn btn-xs btn-success" %>
             <%= product.title %>
-            <%= render partial: "shared/favorite", locals: {product: product} %>
           </td>
+          <% if current_user.present? %>
+            <td><%= render partial: "shared/favorite", locals: {product: product} %></td>
+          <% end %>
           <td><%= product.price %></td>
           <td><%= product.tag_list %></td>
           <td>
