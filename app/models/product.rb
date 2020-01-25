@@ -33,7 +33,7 @@ class Product < ApplicationRecord
   end
 
   def is_favorited?(user)
-    self.favorited_users.include?(user)
+    self.favorites.where(user_id: user, cancel_at: nil).present?
   end
 
 end

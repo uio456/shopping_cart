@@ -14,8 +14,8 @@ class ProductsController < ApplicationController
 
   def unfavorite
     product = Product.find(params[:id])
-    favorites = Favorite.where(product: product, user: current_user)
-    favorites.destroy_all
+    favorites = Favorite.where(product: product, user: current_user, cancel_at: nil)
+    favorites.update_all(cancel_at: Time.current)
     redirect_back(fallback_location: root_path)
   end
 
