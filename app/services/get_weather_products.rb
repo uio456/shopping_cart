@@ -23,10 +23,14 @@ class GetWeatherProducts
         tag_names =  ["保暖", "輕便"]
       when '舒適'
         tag_names =  ["輕便"]
-      when '稍有寒意'
+      when '稍有寒意', '寒冷', '寒冷至稍有寒意'
         tag_names =  ["保暖", "防寒"]
       else
         tag_names = []
+      end
+
+      if @weather_info[:weather_info][:probability_of_recipitation].to_i > 40 # 大於 40 下雨機率
+        tag_names += ["下雨"]
       end
 
       product_ids = Tagging.where(tag_id: Tag.where(name: tag_names).select(:id)).select(:product_id)
