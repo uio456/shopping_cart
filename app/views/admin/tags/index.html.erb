@@ -1,0 +1,15 @@
+<%= render partial: 'admin/shared/navtab' %>
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>所有標籤</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @tags.each do |tag| %>
+    <tr>
+      <td><%= tag.name %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -28,6 +28,7 @@ Rails.application.routes.draw do
   # admin panel
   namespace :admin, path: :make_backend_url_abstruse do
     resources :products
+    resources :tags
 
     resources :promotionals
 

@@ -23,7 +23,7 @@ class Product < ApplicationRecord
 
   def tag_list
     tags.map(&:name).join(',')
-    # 相等於 tags.map { |tag| tag.name }.join(' ')
+    # 相等於 tags.map { |tag| tag.name }.join(',')
   end
 
   def tag_list=(names)
