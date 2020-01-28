@@ -1,0 +1,23 @@
+<%= render partial: 'admin/shared/navtab' %>
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>名稱</th>
+      <th>標籤</th>
+      <th>編輯</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @weather_collects.each do |weather_collect| %>
+    <tr>
+      <td>
+        <%= weather_collect.name %>
+      </td>
+      <td><%= weather_collect.tag_collection %></td>
+      <td>
+        <%= link_to '編輯', edit_admin_weather_collect_path(weather_collect), class: "btn btn-xs btn-default" %>
+      </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>

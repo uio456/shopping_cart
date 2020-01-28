@@ -29,6 +29,7 @@ Rails.application.routes.draw do
   namespace :admin, path: :make_backend_url_abstruse do
     resources :products
     resources :tags
+    resources :weather_collects
 
     resources :promotionals
 

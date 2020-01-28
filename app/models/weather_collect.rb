@@ -1,0 +1,2 @@
+class WeatherCollect < ApplicationRecord
+end
