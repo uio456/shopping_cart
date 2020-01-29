@@ -29,7 +29,7 @@ class Admin::WeatherCollectsController < Admin::BaseController
   end
 
   def weather_collect_params
-    params.require(:weather_collect).permit(:name, :tag_collection)
+    params.require(:weather_collect).permit(:name)
   end
 
 end
