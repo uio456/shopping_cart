@@ -8,18 +8,12 @@ class Product < ApplicationRecord
 
 
   validates_presence_of :vendor, :title, :price, :state
-  validate :check_product_price
+  validates_numericality_of :price, only_integer: true, greater_than_or_equal_to: 0
 
   default_scope { order(updated_at: :desc) }
   scope :avalible_products, -> { where(state: ["vendor_p", "normal", "item_p"])}
   enum state: {vendor_p: "vendor_p", normal: "normal", item_p: "item_p", for_free: "for_free"}
 
-
-  def check_product_price
-    if price <= 0
-      errors.add(:price, "can't not less then 0")
-    end
-  end
 
   def tag_list
     tags.map(&:name).join(',')
