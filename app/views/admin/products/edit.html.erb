@@ -1,5 +1,5 @@
-
+<%= render partial: 'admin/shared/navtab' %>
 <h3 class="text-center"><%= "編輯商品: #{@product.title}"%></h3>
-<span><%= link_to '回後台首頁', admin_root_path %></span>
+<span><%= link_to '回上一頁', admin_root_path %></span>
 
 <%= render "form", product: @product %>

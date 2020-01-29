@@ -41,7 +41,7 @@
       <% if tag.weather_collect.present? %>
         <td><%= tag.weather_collect.name %></td>
       <% else %>
-        <td>還未選擇</td>
+        <td style="color:red;">還未選擇</td>
       <% end %>
       <td>
         <% @weather_collects.each do |weather_collect| %>
