@@ -18,7 +18,7 @@ class GetWeatherProducts
         tag_names =  ["保暖", "輕便"]
       when '舒適'
         tag_names =  ["輕便"]
-      when '稍有寒意', '寒冷', '寒冷至稍有寒意'
+      when '稍有寒意', '寒冷', '寒冷至稍有寒意', '非常寒冷至寒冷'
         tag_names =  ["保暖", "防寒"]
       else
         tag_names = []
