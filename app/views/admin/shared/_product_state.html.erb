@@ -1,9 +1,9 @@
   <%= f.submit "更改促銷狀態", class: "btn btn-xs btn-default" %>
   <%= f.radio_button :state, 'normal' %>
-  <%= label :state, 'normal' %>
+  <%= label :state, I18n.t("promotion.normal") %>
   <%= f.radio_button :state, 'item_p' %>
-  <%= label :state, 'item_p' %>
+  <%= label :state, I18n.t("promotion.item_p") %>
   <%= f.radio_button :state, 'vendor_p' %>
-  <%= label :state, 'vendor_p' %>
+  <%= label :state, I18n.t("promotion.vendor_p") %>
   <%= f.radio_button :state, 'for_free' %>
   <%= label :state, 'for_free' %>

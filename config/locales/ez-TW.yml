@@ -1,6 +1,6 @@
 zh-TW:
   promotion:
-    normal: "賣太好，不打折"
+    normal: "原價"
     item_p: "商品特價"
     vendor_p: "廠商特價"
   get_weather:
