@@ -1,4 +1,5 @@
 <%= render partial: 'admin/shared/navtab' %>
+<h2>標籤蒐集</h2>
 <table class="table table-hover">
   <thead>
     <tr>
@@ -13,9 +14,42 @@
       <td>
         <%= weather_collect.name %>
       </td>
-      <td><%= weather_collect.tag_collection %></td>
+      <td><%= weather_collect.tags.map(&:name).join(',') %></td>
       <td>
         <%= link_to '編輯', edit_admin_weather_collect_path(weather_collect), class: "btn btn-xs btn-default" %>
+      </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<h2>所有標籤</h2>
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>名稱</th>
+      <th>屬於哪種天氣</th>
+      <th>更改天氣</th>
+      <th>刪除標籤</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @tags.each do |tag| %>
+    <tr>
+      <td><%= tag.name %></td>
+      <% if tag.weather_collect.present? %>
+        <td><%= tag.weather_collect.name %></td>
+      <% else %>
+        <td>還未選擇</td>
+      <% end %>
+      <td>
+        <% @weather_collects.each do |weather_collect| %>
+          <%= link_to weather_collect.name, admin_tag_path(id: tag.id, weather_collect_id: weather_collect.id), method: :put, class: "btn btn-xs btn-primary"  %>
+        <% end %>
+      </td>
+      <td>
+        <%= link_to '刪除', admin_tag_path(tag), method: :delete, class: "btn btn-xs btn-danger", data: {confirm:"Are you sure?"}  %>
       </td>
     </tr>
     <% end %>

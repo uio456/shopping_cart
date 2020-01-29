@@ -4,6 +4,7 @@ class Admin::WeatherCollectsController < Admin::BaseController
   def index
     find_weather_collect
     @weather_collects = WeatherCollect.all
+    @tags = Tag.all
   end
 
   def edit

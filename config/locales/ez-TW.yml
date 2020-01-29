@@ -1,8 +1,8 @@
 zh-TW:
   promotion:
     normal: "原價"
-    item_p: "商品特價"
-    vendor_p: "廠商特價"
+    item_p: "商品優惠"
+    vendor_p: "廠商優惠"
   get_weather:
     en:
       taipei_city: "Taipei_City"

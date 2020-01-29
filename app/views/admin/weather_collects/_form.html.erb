@@ -1,11 +1,12 @@
-<div class="col-md-6">
+<div class="col-md-8">
   <%= form_for  [:admin, weather_collect] do |f| %>
     <div class="form-group">
       <%= f.label "名稱" %>
-      <%= f.text_field :name, placeholder: "名稱", class: "form-control"%>
+      <%= f.text_field :name, placeholder: "名稱", class: "form-control", disabled: true%>
     </div>
     <div class="form-group">
-      <%= f.text_field :tag_collection, placeholder: "標籤", class: "form-control"%>
+      <%= f.label "標籤" %>
+      <%= f.text_area :tag_collection, placeholder: "標籤", class: "form-control"%>
     </div>
 
     <div class="form-group">

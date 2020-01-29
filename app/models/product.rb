@@ -1,6 +1,6 @@
 class Product < ApplicationRecord
   belongs_to :vendor
-  has_many :taggings
+  has_many :taggings, dependent: :destroy
   has_many :tags, through: :taggings
 
   has_many :favorites, dependent: :destroy

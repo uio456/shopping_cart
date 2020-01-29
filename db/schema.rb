@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_28_032427) do
+ActiveRecord::Schema.define(version: 2020_01_29_065039) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -102,6 +102,8 @@ ActiveRecord::Schema.define(version: 2020_01_28_032427) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "weather_collect_id"
+    t.index ["weather_collect_id"], name: "index_tags_on_weather_collect_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -144,4 +146,5 @@ ActiveRecord::Schema.define(version: 2020_01_28_032427) do
   add_foreign_key "payments", "orders"
   add_foreign_key "taggings", "products"
   add_foreign_key "taggings", "tags"
+  add_foreign_key "tags", "weather_collects"
 end
