@@ -9,11 +9,17 @@ class Product < ApplicationRecord
 
   validates_presence_of :vendor, :title, :price, :state
   validates_numericality_of :price, only_integer: true, greater_than_or_equal_to: 0
+  validate :check_nember_of_tags
 
   default_scope { order(updated_at: :desc) }
   scope :avalible_products, -> { where(state: ["vendor_p", "normal", "item_p"])}
   enum state: {vendor_p: "vendor_p", normal: "normal", item_p: "item_p", for_free: "for_free"}
 
+  def check_nember_of_tags
+    if tags.size >= 4
+      errors.add(:tags, "最多三個")
+    end
+  end
 
   def tag_list
     tags.map(&:name).join(',')

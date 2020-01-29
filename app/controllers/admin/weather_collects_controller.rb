@@ -6,20 +6,10 @@ class Admin::WeatherCollectsController < Admin::BaseController
     @weather_collects = WeatherCollect.all
   end
 
-  def new
-    
-  end
-
-  def create
-    
-  end
-
   def edit
-    
   end
 
   def update
-    binding.pry
     if @weather_collect.update(weather_collect_params)
       redirect_back(fallback_location: admin_weather_collects_path, notice: "更新成功")
     else
