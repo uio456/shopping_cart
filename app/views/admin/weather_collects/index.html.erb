@@ -1,9 +1,9 @@
 <%= render partial: 'admin/shared/navtab' %>
-<h2>標籤蒐集</h2>
+<h2>天氣群組</h2>
 <table class="table table-hover">
   <thead>
     <tr>
-      <th>名稱</th>
+      <th>天氣群組</th>
       <th>標籤</th>
     </tr>
   </thead>
@@ -14,6 +14,9 @@
         <%= weather_collect.name %>
       </td>
       <td><%= weather_collect.tags.map(&:name).join(',') %></td>
+      <% if current_user.superman? %>
+        <td><%= link_to '編輯', edit_admin_weather_collect_path(weather_collect),class: "btn btn-xs btn-default" %></td>
+      <% end %>
     </tr>
     <% end %>
   </tbody>
@@ -24,8 +27,8 @@
 <table class="table table-hover">
   <thead>
     <tr>
-      <th>名稱</th>
-      <th>屬於哪種天氣</th>
+      <th>標籤</th>
+      <th>屬於哪個天氣群組</th>
       <th>更改天氣</th>
       <th>刪除標籤</th>
     </tr>
