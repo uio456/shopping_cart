@@ -27,7 +27,6 @@ puts "Default admin create!"
 
 Promotional.create(title: "折扣", discount_deadline: Time.now+1.years)
 
-
 price = [100, 200, 300]
 30.times do |i|
   p = Product.create(
@@ -38,11 +37,3 @@ price = [100, 200, 300]
   )
   puts p.title
 end
-
-
-# 按下結帳時可以抽獎，後台給一個 rand(10) 如果是 7 就在打五折
-# Create Staff Table
-# 加入i18n 
-# 寫測試
-# 首頁顯示已拿到折扣多少
-# AJAX 輔助按鈕獨立送出
