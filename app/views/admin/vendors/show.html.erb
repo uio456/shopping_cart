@@ -32,15 +32,7 @@
       </td>
       <td>
         <%= form_for  [:admin, product] do |f| %>
-          <%= f.submit "更改促銷狀態", class: "btn btn-xs btn-default" %>
-          <%= f.radio_button :state, 'normal' %>
-          <%= label :state, 'normal' %>
-          <%= f.radio_button :state, 'item_p' %>
-          <%= label :state, 'item_p' %>
-          <%= f.radio_button :state, 'vendor_p' %>
-          <%= label :state, 'vendor_p' %>
-          <%= f.radio_button :state, 'for_free' %>
-          <%= label :state, 'for_free' %>
+          <%= render partial: 'admin/shared/product_state', locals:{f: f} %>
         <% end %>
       </td>
     </tr>

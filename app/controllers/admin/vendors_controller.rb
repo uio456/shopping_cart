@@ -1,4 +1,9 @@
 class Admin::VendorsController < Admin::BaseController
+
+  def index
+    @vendors = Vendor.all
+  end
+
   def show
     @vendor = Vendor.find(params[:id])
     @products = @vendor.products
