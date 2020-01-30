@@ -1,6 +1,6 @@
 <%= render partial: 'admin/shared/navtab' %>
   <% if current_user.superman? %>
-    <h1>商品列表 <%= link_to '新增廠商', new_admin_product_path, class: "btn btn-default btn-light" %> </h1>
+    <h1>商品列表 <%= link_to '新增廠商', new_admin_vendor_path, class: "btn btn-default btn-light" %> </h1>
   <% end %>
 
   <ul class="nav nav-pills nav-pills-center">

@@ -7,12 +7,13 @@ class Admin::UsersController < Admin::BaseController
 
   def new
     @user = User.new
+    # 這裡應該要傳 VendorStaff.new
   end
 
   def create
     @user = User.new(user_params)
     if @user.save
-      redirect_to admin_users_path, notice: "新增管理員完成"
+      redirect_to admin_admin_users_path, notice: "新增管理員完成"
     else
       flash.alert = Errorhandle.call(@user)
       render :new
@@ -38,7 +39,11 @@ class Admin::UsersController < Admin::BaseController
   end
 
   def admin
-    @users = User.all_admin
+    if current_user.superman?
+      @users = User.all_admin
+    elsif current_user.vendor_id.present?
+      @users = User.where(vendor_id: current_user.vendor_id)
+    end
   end
 
   private
@@ -49,7 +54,7 @@ class Admin::UsersController < Admin::BaseController
   end
 
   def user_params
-    params.require(:user).permit(:role, :name, :email, :password)
+    params.require(:user).permit(:role, :name, :email, :password, :vendor_id)
   end
 
 end

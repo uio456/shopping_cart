@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_29_115211) do
+ActiveRecord::Schema.define(version: 2020_01_30_084708) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -120,8 +120,11 @@ ActiveRecord::Schema.define(version: 2020_01_29_115211) do
     t.text "intro"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "type"
+    t.bigint "vendor_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["vendor_id"], name: "index_users_on_vendor_id"
   end
 
   create_table "vendors", force: :cascade do |t|
@@ -146,4 +149,5 @@ ActiveRecord::Schema.define(version: 2020_01_29_115211) do
   add_foreign_key "taggings", "products"
   add_foreign_key "taggings", "tags"
   add_foreign_key "tags", "weather_collects"
+  add_foreign_key "users", "vendors"
 end
