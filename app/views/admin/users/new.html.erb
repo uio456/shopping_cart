@@ -6,9 +6,13 @@
     <div class="col-md-6">
       <%= form_for  [:admin, @user] do |f| %>
         <div class="form-group">
-          <!-- 如果是廠商管理員，直接把廠商寫死 -->
-          <%= f.label :vendor, "屬於哪個廠商" %>
-          <%= f.collection_select :vendor_id, Vendor.all, :id, :name, {prompt: "Select Vendor"}, {class: "form-control"} %>
+          <% if current_user.vendor_staff? %>
+            <%= f.label :vendor, "屬於哪個廠商" %>
+            <%= f.collection_select :vendor_id, Vendor.where(id: current_user.vendor_id), :id, :name, {}, {class: "form-control",  readonly: true} %>
+          <% else %>
+            <%= f.label :vendor, "屬於哪個廠商" %>
+            <%= f.collection_select :vendor_id, Vendor.all, :id, :name, {prompt: "選擇廠商"}, {class: "form-control"} %>
+          <% end %>
         </div>
         <div class="form-group">
           <%= f.text_field :name, placeholder: "姓名", class: "form-control"%>
@@ -20,7 +24,8 @@
           <%= f.text_field :password, placeholder: "密碼", class: "form-control"%>
         </div>
         <div class="form-group">
-          <%= f.select(:role, options_for_select(User::ROLE, @user.role), {}, { :class => 'form-control'}) %>
+          <!-- 不同角色要有不同 role -->
+          <%= f.select(:role, options_for_select(User::ROLE[1..2], @user.role), {}, { :class => 'form-control'}) %>
         </div>
         <div class="form-group">
           <%= f.submit "Submit", class: "btn btn-primary" %>

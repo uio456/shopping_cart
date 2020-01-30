@@ -11,7 +11,12 @@ class Admin::UsersController < Admin::BaseController
   end
 
   def create
-    @user = User.new(user_params)
+    if params[:vendor_id].present?
+      @user = VendorStaff.new(user_params)
+    else
+      @user = User.new(user_params)
+    end
+
     if @user.save
       redirect_to admin_admin_users_path, notice: "新增管理員完成"
     else
@@ -40,9 +45,9 @@ class Admin::UsersController < Admin::BaseController
 
   def admin
     if current_user.superman?
-      @users = User.all_admin
+      @users = User.where.not(role: "normal")
     elsif current_user.vendor_id.present?
-      @users = User.where(vendor_id: current_user.vendor_id)
+      @users = VendorStaff.where(vendor_id: current_user.vendor_id)
     end
   end
 

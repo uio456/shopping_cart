@@ -5,21 +5,24 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   scope :all_customers, -> {where(role: "normal")}
-  scope :all_admin, -> {where.not(role: "normal")}
 
   has_many :orders
-
   has_many :favorites, dependent: :destroy
   has_many :favorited_products, through: :favorites, source: :product
 
   ROLE = ["normal", "admin", "superman"]
-
+# 重新思考權限
+# user、admin、vendor_staff
   def admin?
     role != "normal"
   end
 
   def superman?
     role == "superman"
+  end
+
+  def vendor_staff?
+    vendor_id.present? && admin?
   end
 
 end
