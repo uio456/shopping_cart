@@ -1,5 +1,6 @@
 <%= render partial: 'admin/shared/navtab' %>
-<% if current_user.admin? %>
+<% if current_user.superman? %>
+<!-- 超人與廠商的超人才可以新增 -->
   <%= link_to '新增管理員', new_admin_user_path, class: "btn btn btn-default" %>
 <% end %>
 <table class="table table-hover">
@@ -7,8 +8,8 @@
     <tr>
       <th>姓名</th>
       <th>電子郵件</th>
-      <th>廠商</th>
       <th>權限</th>
+      <th>廠商</th>
       <th>編輯</th>
     </tr>
   </thead>

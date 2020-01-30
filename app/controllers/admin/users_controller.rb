@@ -11,10 +11,12 @@ class Admin::UsersController < Admin::BaseController
   end
 
   def create
-    if params[:vendor_id].present?
+    # 考慮把 admin 也加入一個 vendor_id，這樣比較一致
+    if params[:user][:vendor_id].present?
       @user = VendorStaff.new(user_params)
     else
       @user = User.new(user_params)
+      # 這邊不會有一般使用者，可以改成 Admin.new
     end
 
     if @user.save
