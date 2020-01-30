@@ -44,7 +44,7 @@
       <% end %>
       <td>
         <% @weather_collects.each do |weather_collect| %>
-          <%= link_to weather_collect.name, admin_tag_path(id: tag.id, weather_collect_id: weather_collect.id), method: :put, class: "btn btn-xs btn-primary"  %>
+          <%= link_to weather_collect.name, admin_tag_path(id: tag.id, weather_collect_id: weather_collect.id), method: :patch, class: "btn btn-xs btn-primary"  %>
         <% end %>
       </td>
       <td>
