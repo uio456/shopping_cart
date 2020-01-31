@@ -1,17 +1,7 @@
 <%= render partial: 'admin/shared/navtab' %>
   <% if current_user.superman? %>
-    <h1>商品列表 <%= link_to '新增廠商', new_admin_vendor_path, class: "btn btn-default btn-light" %> </h1>
+    <h1><%= link_to '新增廠商', new_admin_vendor_path, class: "btn btn-default btn-light" %> </h1>
   <% end %>
-
-  <ul class="nav nav-pills nav-pills-center">
-    <li role="presentation" class="active"><%=link_to '全部商品', admin_products_path %></li>
-      <% @vendors.each do |vendor| %>
-    <li role="presentation">
-      <%= link_to vendor.name, admin_vendor_path(vendor) %>
-    </li>
-      <% end %>
-  </ul>
-
 
 <table class="table table-hover">
   <thead>
