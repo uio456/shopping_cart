@@ -14,7 +14,7 @@ class User < ApplicationRecord
   has_many :favorited_products, through: :favorites, source: :product
 
   ROLE = ["normal", "admin", "superman"]
-  # 把顧客的role 變成空字串
+  # 把顧客的 role 變成空字串
   # superman 超人
   # admin 我管理員、廠商超人
   # normal 普通廠商員工

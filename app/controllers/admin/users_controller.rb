@@ -11,6 +11,8 @@ class Admin::UsersController < Admin::BaseController
 
   def create
     # 考慮把 admin 也加入一個 vendor_id，這樣比較一致
+    # 使用者在頁面註冊不會跑這裡
+    @user_identify = :user
     if params[:user][:vendor_id].present?
       @user = VendorStaff.new(user_params)
     else
@@ -33,14 +35,20 @@ class Admin::UsersController < Admin::BaseController
       flash[:alert] = "不要亂動~"
       redirect_back(fallback_location: admin_admin_users_path)
       # render :file => "public/401.html", :status => :unauthorized
-    else
-      @user.update(user_params)
-      if @user.role == "admin" || @user.role == "superman"
-        redirect_to admin_admin_users_path, notice: "更新管理員完成"
-      else
-        redirect_to admin_users_path, notice: "更新使用者完成"
-      end
     end
+
+    case @user.class.name
+    when User.name
+      @user_identify = :user
+    when VendorStaff.name
+      @user_identify = :vendor_staff
+    when AdminStaff.name
+      @user_identify = :admin_staff
+    end
+
+    @user.update(user_params)
+    redirect_back(fallback_location: admin_admin_users_path, notice: "更新使用者完成")
+
   end
 
   def admin
@@ -59,7 +67,9 @@ class Admin::UsersController < Admin::BaseController
   end
 
   def user_params
-    params.require(:user).permit(:role, :name, :email, :password, :vendor_id)
+    params.require(@user_identify).permit(:role, :name, :email, :password, :vendor_id)
+    # 應映三種 user 身份，原本寫了三種user_params、vendor_staff_parmas、admin_staff_parmas
+    # 後來改由 @user_identify 判斷身份
   end
 
 end
