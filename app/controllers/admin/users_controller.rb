@@ -7,7 +7,6 @@ class Admin::UsersController < Admin::BaseController
 
   def new
     @user = User.new
-    # 這裡應該要傳 VendorStaff.new
   end
 
   def create
@@ -15,8 +14,7 @@ class Admin::UsersController < Admin::BaseController
     if params[:user][:vendor_id].present?
       @user = VendorStaff.new(user_params)
     else
-      @user = User.new(user_params)
-      # 這邊不會有一般使用者，可以改成 Admin.new
+      @user = AdminStaff.new(user_params)
     end
 
     if @user.save
@@ -47,7 +45,7 @@ class Admin::UsersController < Admin::BaseController
 
   def admin
     if current_user.superman?
-      @users = User.where.not(role: "normal")
+      @users = User.where.not(type: User.name)
     elsif current_user.vendor_id.present?
       @users = VendorStaff.where(vendor_id: current_user.vendor_id)
     end

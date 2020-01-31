@@ -1,6 +1,6 @@
 <%= render partial: 'admin/shared/navtab' %>
-<% if current_user.superman? %>
-<!-- 超人與廠商的超人才可以新增 -->
+<% if superman_or_vendor_admin? %>
+<!-- 超人與廠商的管理員才可以新增 -->
   <%= link_to '新增管理員', new_admin_user_path, class: "btn btn btn-default" %>
 <% end %>
 <table class="table table-hover">
@@ -23,7 +23,7 @@
       <td><%= user.role %></td>
       <td><%= user.vendor_id %></td>
       <td>
-        <% if current_user.superman? %>
+        <% if superman_or_vendor_admin? %>
           <%= link_to '編輯', edit_admin_user_path(user), class: "btn btn-xs btn-default" %>
         <% end %>
       </td>
