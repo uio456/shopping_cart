@@ -3,7 +3,11 @@ class Admin::ProductsController < Admin::BaseController
 
   def index
     @vendors = Vendor.all
-    @products = Product.all.includes(:tags)
+    if current_user.superman?
+      @products = Product.all.includes(:tags)
+    else
+      @products = Product.where(vendor_id: current_user.vendor_id).includes(:tags)
+    end
     @product = Product.new
   end
 
