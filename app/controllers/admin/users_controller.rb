@@ -12,7 +12,7 @@ class Admin::UsersController < Admin::BaseController
   def create
     # 考慮把 admin 也加入一個 vendor_id，這樣比較一致
     # 使用者在頁面註冊不會跑這裡
-    @user_identify = :user
+    @user_identify = :user # 因為 new 的 from_for 送進來的 params 是 user 所以不需要跟 updateu 一樣做另外的判斷
     if params[:user][:vendor_id].present?
       @user = VendorStaff.new(user_params)
     else
