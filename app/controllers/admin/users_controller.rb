@@ -1,5 +1,5 @@
 class Admin::UsersController < Admin::BaseController
-  before_action :find_user, only: [:edit, :update]
+  before_action :find_user
 
   def index
     @users = User.all_customers
@@ -12,7 +12,9 @@ class Admin::UsersController < Admin::BaseController
   def create
     # 考慮把 admin 也加入一個 vendor_id，這樣比較一致
     # 使用者在頁面註冊不會跑這裡
-    @user_identify = :user # 因為 new 的 from_for 送進來的 params 是 user 所以不需要跟 updateu 一樣做另外的判斷
+
+    @user_identify = :user
+    # 因為 new 的 from_for 送進來的 params 是 user 所以不需要跟 updateu 一樣做另外的判斷
     if params[:user][:vendor_id].present?
       @user = VendorStaff.new(user_params)
     else
@@ -46,8 +48,12 @@ class Admin::UsersController < Admin::BaseController
       @user_identify = :admin_staff
     end
 
-    @user.update(user_params)
-    redirect_back(fallback_location: admin_admin_users_path, notice: "更新使用者完成")
+    if @user.update(user_params)
+      redirect_back(fallback_location: admin_admin_users_path, notice: "更新使用者完成")
+    else
+      flash.alert = Errorhandle.call(@user)
+      render :edit
+    end
 
   end
 
@@ -62,8 +68,11 @@ class Admin::UsersController < Admin::BaseController
   private
 
   def find_user
-    @user = User.find_by(id: params[:id])
-    redirect_to users_path, notice: "無此使用者" unless @user
+    @user = if params[:id]
+              User.find(params[:id])
+            else
+              User.new
+            end
   end
 
   def user_params
