@@ -33,7 +33,7 @@ class GetWeatherProducts
     def get_weather_group(i)
       # 防止找不到噴錯
       if WeatherCollect.find_by(name: WeatherCollect::WEATHER_GROUP[i]).present?
-        WeatherCollect.find_by(name: WeatherCollect::WEATHER_GROUP[i]).tags.select(:name)
+        WeatherCollect.find_by(name: WeatherCollect::WEATHER_GROUP[i]).tags.pluck(:name)
       else
         []
       end
