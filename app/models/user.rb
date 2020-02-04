@@ -4,7 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  # 驗證格式
+  # email 驗證格式
   # validates :email, presence: true, format: { with: /\A[\w+\-.\[\]]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i}, uniqueness: true
 
   scope :all_customers, -> {where(role: "normal")}
@@ -14,18 +14,22 @@ class User < ApplicationRecord
   has_many :favorited_products, through: :favorites, source: :product
 
   ROLE = ["normal", "admin", "superman"]
-  # 把顧客的 role 變成空字串
-  # superman 超人
-  # admin 我管理員、廠商超人
-  # normal 普通廠商員工
-  # I18n 轉換
 
-  def admin?
-    role != "normal"
-  end
+  # FIXME，修改成 enum 存取 role，增加安全性。
+  # enum role: {
+  #   # 存取語法 User.roles
+  #   customer: "customer",
+  #   normal: "normal",
+  #   admin: "admin",
+  #   superman: "superman"
+  # }
 
   def superman?
     role == "superman"
+  end
+
+  def admin?
+    role != "normal"
   end
 
   def vendor_admin?
