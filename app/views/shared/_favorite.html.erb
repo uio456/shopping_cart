@@ -1,9 +1,9 @@
 <% if product.is_favorited?(current_user) %>
   <%= link_to unfavorite_product_path(product), method: :post do %>
-    <i class="glyphicon glyphicon-heart-empty"></i>
+    <i class="glyphicon glyphicon-heart"></i>
   <% end %>
 <% else %>
   <%= link_to favorite_product_path(product), method: :post do %>
-    <i class="glyphicon glyphicon-heart"></i>
+    <i class="glyphicon glyphicon-heart-empty"></i>
   <% end %>
 <% end %>
