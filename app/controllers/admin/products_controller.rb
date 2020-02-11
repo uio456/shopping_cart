@@ -30,6 +30,7 @@ class Admin::ProductsController < Admin::BaseController
   end
 
   def update
+    authorize [:admin, @product]
     if @product.update(product_params)
       redirect_back(fallback_location: admin_products_path, notice: "商品更新成功")
     else

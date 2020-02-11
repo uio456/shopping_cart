@@ -1,5 +1,4 @@
 class ApplicationController < ActionController::Base
-
   include CartsHelper
 
   def create_fail_error_message(record)

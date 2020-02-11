@@ -29,7 +29,7 @@ class Admin::VendorsController < Admin::BaseController
 
   def update
     if @vendor.update(vendor_params)
-      redirect_back(fallback_location: admin_vendors_path, notice: "商品更新成功")
+      redirect_back(fallback_location: admin_vendors_path, notice: "更新成功")
     else
       redirect_back(fallback_location: admin_vendors_path, alert: @vendor.errors.full_messages.to_sentence)
     end
