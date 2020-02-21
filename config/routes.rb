@@ -6,6 +6,16 @@ Rails.application.routes.draw do
   get  'signup', to: 'users#new'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
+  # API
+  namespace :api, defaults: {format: :json} do
+    namespace :v1 do
+      post '/login', to: 'auth#login'
+      post '/logout', to: 'auth#logout'
+
+      resources :products, only: [:index, :create, :show, :update, :destroy]
+    end
+  end
+
   # public panel
   resources :products do
     member do
