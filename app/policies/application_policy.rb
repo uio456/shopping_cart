@@ -7,7 +7,7 @@ class ApplicationPolicy
   end
 
   def index?
-    false
+    basic_auth
   end
 
   def show?
@@ -15,7 +15,7 @@ class ApplicationPolicy
   end
 
   def create?
-    false
+    basic_auth
   end
 
   def new?
@@ -34,9 +34,12 @@ class ApplicationPolicy
     false
   end
 
+  def basic_auth
+    user.superman? or user.admin?
+  end
+
   class Scope
     attr_reader :user, :scope
-
     def initialize(user, scope)
       @user = user
       @scope = scope
