@@ -23,7 +23,7 @@ class ApplicationPolicy
   end
 
   def update?
-    false
+    basic_auth
   end
 
   def edit?

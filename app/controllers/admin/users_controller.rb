@@ -75,8 +75,6 @@ class Admin::UsersController < Admin::BaseController
 
   def user_params
     params.require(@user_identify).permit(:role, :name, :email, :password, :vendor_id)
-    # 應映三種 user 身份，原本寫了三種user_params、vendor_staff_parmas、admin_staff_parmas
-    # 後來改由 @user_identify 判斷身份
   end
 
 end
