@@ -32,12 +32,8 @@ Rails.application.routes.draw do
     resources :weather_collects
 
     resources :promotionals
-
-    resources :users do
-      collection do
-        get :admin
-      end
-    end
+    resources :users
+    resources :admins, only: [:index]
 
     resources :vendors do
       member do

@@ -10,8 +10,6 @@ class Admin::UsersController < Admin::BaseController
   end
 
   def create
-    # 考慮把 admin 也加入一個 vendor_id，這樣比較一致
-    # 使用者在頁面註冊不會跑這裡
 
     @user_identify = :user
     # 因為 new 的 from_for 送進來的 params 是 user 所以不需要跟 updateu 一樣做另外的判斷
@@ -49,7 +47,7 @@ class Admin::UsersController < Admin::BaseController
     end
 
     if @user.update(user_params)
-      redirect_back(fallback_location: admin_admin_users_path, notice: "更新使用者完成")
+      redirect_back(fallback_location: admin_admins_path, notice: "更新使用者完成")
     else
       flash.alert = Errorhandle.call(@user)
       render :edit
